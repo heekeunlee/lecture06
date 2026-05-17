@@ -1878,11 +1878,72 @@ plt.show()
       </section>
 
       <section class="reveal">
-        <div class="closing-card">
-          <h2>오늘의 결론: AI는 원인을 단독 판정하지 않습니다. OLED (Organic Light Emitting Diode) 증착 설비에서 가장 먼저 점검해야 할 '최고 우선순위 전조 신호'들을 똑똑하게 정렬해 줄 뿐입니다.</h2>
-          <p>
-            06강의 중추적 주제는 추상적이고 복잡한 기계학습 모델링이 아닌, 실제 공정과 핵심 장비의 1분 폴링 로그 데이터를 시작으로 "정상 상태 수집 ➡ 이상 징후 포착 ➡ AI 기반 SPC (Statistical Process Control) 판정 및 경보 ➡ 현장 대시보드 리포팅"까지의 제조 기술 엔지니어링 표준 대응 루프를 완성하는 것입니다. VTE (Vacuum Thermal Evaporation) - 03 장비의 소스 온도, 챔버 압력, QCM (Quartz Crystal Microbalance) 증착 속도를 일원화된 타임라인에 엮고 정확한 통계 연산 가이드를 전달하면, AI는 여러분의 손발이 되어 현장의 위험 다운타임을 사전 봉쇄하는 가장 정밀한 지휘 통제 화면을 생성해 낼 것입니다.
-          </p>
+        <div class="closing-card" style="padding: 2.5rem; background: #0f172a; border: 1.5px solid rgba(255,255,255,0.08); border-radius: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: left;">
+          <!-- 1. High-Impact Accent Quote -->
+          <div style="border-left: 5px solid var(--accent); padding-left: 1.5rem; margin-bottom: 2rem;">
+            <h2 style="font-size: 1.5rem; font-weight: 900; line-height: 1.45; word-break: keep-all; margin: 0; color: #ffffff;">
+              오늘의 결론: AI는 원인을 단독 판정하지 않습니다.<br>
+              <span style="color: var(--accent); font-weight: 900;">'최고 우선순위 전조 신호'들을 똑똑하게 정렬해 줄 뿐입니다.</span>
+            </h2>
+          </div>
+
+          <!-- 2. Core Chapter Loop Roadmap (Visual horizontal flow) -->
+          <h3 style="color: #94a3b8; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">🔄 06강 핵심 기술 엔지니어링 표준 대응 루프</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
+            <!-- Step 1 -->
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.2rem; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+              <div style="background: #e0f2fe; color: #0284c7; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; margin-bottom: 0.8rem;">1</div>
+              <h4 style="color: #fff; font-size: 0.95rem; font-weight: 800; margin: 0 0 0.4rem 0;">정상 상태 수집</h4>
+              <p style="color: #9ca3af; font-size: 0.78rem; line-height: 1.4; margin: 0;">1분 주기 다차원 센서 데이터 통합 수집 (SCADA/MES Historian)</p>
+            </div>
+            <!-- Step 2 -->
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.2rem; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+              <div style="background: #fff9db; color: #b7791f; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; margin-bottom: 0.8rem;">2</div>
+              <h4 style="color: #fff; font-size: 0.95rem; font-weight: 800; margin: 0 0 0.4rem 0;">이상 징후 포착</h4>
+              <p style="color: #9ca3af; font-size: 0.78rem; line-height: 1.4; margin: 0;">센서 간 미세 드리프트 및 온도/압력 이상 동조성 역추적</p>
+            </div>
+            <!-- Step 3 -->
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.2rem; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+              <div style="background: #fee2e2; color: #ef4444; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; margin-bottom: 0.8rem;">3</div>
+              <h4 style="color: #fff; font-size: 0.95rem; font-weight: 800; margin: 0 0 0.4rem 0;">AI 기반 SPC 판정</h4>
+              <p style="color: #9ca3af; font-size: 0.78rem; line-height: 1.4; margin: 0;">정밀 3σ 통계 관리한계선 설정을 통한 고장 조기 경보 자동화</p>
+            </div>
+            <!-- Step 4 -->
+            <div style="background: rgba(14,165,233,0.08); border: 2px solid var(--accent); border-radius: 16px; padding: 1.2rem; transition: transform 0.2s; box-shadow: 0 4px 14px rgba(14,165,233,0.15);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+              <div style="background: #e6fffa; color: #319795; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; margin-bottom: 0.8rem;">4</div>
+              <h4 style="color: #fff; font-size: 0.95rem; font-weight: 800; margin: 0 0 0.4rem 0;">현장 대시보드 리포팅</h4>
+              <p style="color: #e2e8f0; font-size: 0.78rem; line-height: 1.4; margin: 0; font-weight: 700;">인과 패턴 가시화 및 정비 이력 결합 교차 검증 (SOP 연계)</p>
+            </div>
+          </div>
+
+          <!-- 3. Key Takeaways Grid Lists -->
+          <h3 style="color: #94a3b8; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">💡 실무 지향 핵심 테이크어웨이</h3>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Takeaway 1 -->
+            <div style="display: flex; gap: 1.2rem; align-items: flex-start; background: rgba(255,255,255,0.02); border-radius: 14px; padding: 1.2rem; border-left: 4px solid #38bdf8; border-top: 1px solid rgba(255,255,255,0.04); border-right: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04);">
+              <span style="font-size: 1.6rem; line-height: 1;">🛠️</span>
+              <div>
+                <h5 style="color: #ffffff; font-size: 0.95rem; font-weight: 800; margin: 0 0 0.3rem 0;">실무 엔지니어의 의사결정을 가속하는 조력자로서의 AI</h5>
+                <p style="color: #9ca3af; font-size: 0.84rem; line-height: 1.5; margin: 0; word-break: keep-all;">AI는 의사결정을 독점하거나 가로막지 않습니다. 수천 개의 센서 흐름 중 <strong>현장 엔지니어가 가장 먼저 확인해야 할 '우선순위 후보군'을 영리하게 랭킹화</strong>함으로써 설비 점검 속도를 극대화합니다.</p>
+              </div>
+            </div>
+            <!-- Takeaway 2 -->
+            <div style="display: flex; gap: 1.2rem; align-items: flex-start; background: rgba(255,255,255,0.02); border-radius: 14px; padding: 1.2rem; border-left: 4px solid #facc15; border-top: 1px solid rgba(255,255,255,0.04); border-right: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04);">
+              <span style="font-size: 1.6rem; line-height: 1;">📊</span>
+              <div>
+                <h5 style="color: #ffffff; font-size: 0.95rem; font-weight: 800; margin: 0 0 0.3rem 0;">일원화된 다차원 센서 정렬의 직관적 파워</h5>
+                <p style="color: #9ca3af; font-size: 0.84rem; line-height: 1.5; margin: 0; word-break: keep-all;">진공 챔버 압력, 소스 히터 온도, QCM 박막 성장률을 각각 별도로 관측하는 것을 넘어, <strong>단일 공통 타임라인에 시각적으로 정렬(Align)하는 순간</strong> 공정 변수 간의 기하학적 인과관계와 이상 신호 동조성이 선명하게 드러납니다.</p>
+              </div>
+            </div>
+            <!-- Takeaway 3 -->
+            <div style="display: flex; gap: 1.2rem; align-items: flex-start; background: rgba(255,255,255,0.02); border-radius: 14px; padding: 1.2rem; border-left: 4px solid #ef4444; border-top: 1px solid rgba(255,255,255,0.04); border-right: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04);">
+              <span style="font-size: 1.6rem; line-height: 1;">🛡️</span>
+              <div>
+                <h5 style="color: #ffffff; font-size: 0.95rem; font-weight: 800; margin: 0 0 0.3rem 0;">골든타임 선점을 통한 설비 강제 셧다운 사전 봉쇄</h5>
+                <p style="color: #9ca3af; font-size: 0.84rem; line-height: 1.5; margin: 0; word-break: keep-all;">돌이킬 수 없는 물리적 고장이 발생하기 이전, 미세 압력 누설이나 온도 오차는 점진적인 흔적을 남깁니다. <strong>정밀 통계적 관리도(SPC)를 연계해 고장이 나기 수시간 전 골든타임을 확보</strong>하는 것이 최첨단 제조 엔지니어링의 본질입니다.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
