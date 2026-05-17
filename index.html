@@ -479,15 +479,13 @@
       }
 
       .step-flow-body {
-        display: flex;
-        gap: 2rem;
-        align-items: flex-start;
-        flex-wrap: wrap;
+        display: block;
       }
 
       .step-flow-content {
-        flex: 2;
-        min-width: 300px;
+        max-width: 860px;
+        margin: 0 auto;
+        width: 100%;
       }
 
       .step-desc {
@@ -505,22 +503,6 @@
         border-radius: 0 20px 20px 0;
         font-size: 0.95rem;
         line-height: 1.7;
-      }
-
-      .step-flow-visual {
-        flex: 1;
-        min-width: 180px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .step-animation {
-        width: 100%;
-        max-width: 180px;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-        border: 1px solid var(--border);
       }
 
       .compare-flow {
@@ -1037,9 +1019,6 @@
                   </div>
                 </div>
               </div>
-              <div class="step-flow-visual">
-                <img src="step1.gif" alt="Step 1 Animation" class="step-animation">
-              </div>
             </div>
           </div>
 
@@ -1071,9 +1050,6 @@
                   </div>
                 </div>
               </div>
-              <div class="step-flow-visual">
-                <img src="step2.gif" alt="Step 2 Animation" class="step-animation">
-              </div>
             </div>
           </div>
 
@@ -1086,10 +1062,7 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc">소스 온도가 조금씩 상승하고, 챔버 압력이 UCL 근처로 접근하며, QCM 증착률 변동폭이 커집니다. 비정상적인 열 축적이나 진공 누설의 초기 신호일 수 있습니다.</p>
-              </div>
-              <div class="step-flow-visual">
-                <img src="step3.gif" alt="Step 3 Animation" class="step-animation">
+                <p class="step-desc" style="margin-bottom: 0;">소스 온도가 조금씩 상승하고, 챔버 압력이 UCL 근처로 접근하며, QCM 증착률 변동폭이 커집니다. 비정상적인 열 축적이나 진공 누설의 초기 신호일 수 있습니다.</p>
               </div>
             </div>
           </div>
@@ -1103,10 +1076,7 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc">정상 구간 기준 Center/UCL/LCL, 이동평균, 연속 상승 규칙, 다중 센서 동시 변화 규칙을 적용합니다. 이를 통해 엔지니어가 놓치기 쉬운 미세한 이상 패턴을 자동으로 진단해 냅니다.</p>
-              </div>
-              <div class="step-flow-visual">
-                <img src="step4.gif" alt="Step 4 Animation" class="step-animation">
+                <p class="step-desc" style="margin-bottom: 0;">정상 구간 기준 Center/UCL/LCL, 이동평균, 연속 상승 규칙, 다중 센서 동시 변화 규칙을 적용합니다. 이를 통해 엔지니어가 놓치기 쉬운 미세한 이상 패턴을 자동으로 진단해 냅니다.</p>
               </div>
             </div>
           </div>
@@ -1120,10 +1090,7 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc">설비 상태 타일, 관리도, 알림 목록, 전조 패턴 요약, 엔지니어 조치 메모를 한 화면에 구성합니다. 직관적인 UI를 제공하여 현장 대응 속도를 획기적으로 개선합니다.</p>
-              </div>
-              <div class="step-flow-visual">
-                <img src="step5.gif" alt="Step 5 Animation" class="step-animation">
+                <p class="step-desc" style="margin-bottom: 0;">설비 상태 타일, 관리도, 알림 목록, 전조 패턴 요약, 엔지니어 조치 메모를 한 화면에 구성합니다. 직관적인 UI를 제공하여 현장 대응 속도를 획기적으로 개선합니다.</p>
               </div>
             </div>
           </div>
@@ -1137,10 +1104,7 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc">PM 이력, 재료 교체 시점, 진공 펌프 상태, QCM 센서 보정 이력과 연결해 원인 후보를 좁힙니다. 교차 분석을 바탕으로 불량 발생 전 선제적 조치를 수립합니다.</p>
-              </div>
-              <div class="step-flow-visual">
-                <img src="step6.gif" alt="Step 6 Animation" class="step-animation">
+                <p class="step-desc" style="margin-bottom: 0;">PM 이력, 재료 교체 시점, 진공 펌프 상태, QCM 센서 보정 이력과 연결해 원인 후보를 좁힙니다. 교차 분석을 바탕으로 불량 발생 전 선제적 조치를 수립합니다.</p>
               </div>
             </div>
           </div>
@@ -1154,10 +1118,7 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc">장비 담당자와 공정 엔지니어가 같은 리포트를 보고 조치 우선순위를 정합니다. 데이터에 기반한 빠르고 투명한 커뮤니케이션으로 공장 다운타임을 최소화합니다.</p>
-              </div>
-              <div class="step-flow-visual">
-                <img src="step7.gif" alt="Step 7 Animation" class="step-animation">
+                <p class="step-desc" style="margin-bottom: 0;">장비 담당자와 공정 엔지니어가 같은 리포트를 보고 조치 우선순위를 정합니다. 데이터에 기반한 빠르고 투명한 커뮤니케이션으로 공장 다운타임을 최소화합니다.</p>
               </div>
             </div>
           </div>
