@@ -416,6 +416,113 @@
         word-break: keep-all;
       }
 
+      /* Premium Sequential Timeline Flow Styles */
+      .steps-flow-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .step-flow-card {
+        border: 1px solid var(--border);
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 2.2rem;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .step-flow-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.08);
+      }
+
+      .step-flow-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .step-flow-badge {
+        font-size: 0.85rem;
+        font-weight: 900;
+        padding: 0.45rem 0.9rem;
+        background: var(--bg-soft);
+        color: var(--accent);
+        border-radius: 999px;
+        letter-spacing: -0.01em;
+      }
+
+      .step-flow-header h3 {
+        font-size: 1.35rem;
+        font-weight: 900;
+        color: var(--text-primary);
+        margin: 0;
+        flex: 1;
+        min-width: 200px;
+        letter-spacing: -0.02em;
+      }
+
+      .step-flow-tag {
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        background: var(--bg-secondary);
+      }
+
+      .step-flow-body {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .step-flow-content {
+        flex: 2;
+        min-width: 300px;
+      }
+
+      .step-desc {
+        font-size: 1.08rem;
+        color: var(--text-primary);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        word-break: keep-all;
+      }
+
+      .step-detail-box {
+        border-left: 4px solid var(--accent);
+        background: var(--bg-secondary);
+        padding: 1.8rem;
+        border-radius: 0 20px 20px 0;
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      .step-flow-visual {
+        flex: 1;
+        min-width: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .step-animation {
+        width: 100%;
+        max-width: 180px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        border: 1px solid var(--border);
+      }
+
       .compare-flow {
         display: grid;
         gap: 1.2rem;
@@ -903,106 +1010,155 @@
             <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.2rem; text-align: center; word-break: keep-all;">R, G, B 유기물 서브픽셀 패턴이 정밀하게 형성된 유리 기판</p>
           </div>
         </div>
-        <div class="time-table" aria-label="설비 데이터 처리 단계">
-          <div class="time-row">
-            <div class="time">Step 1</div>
-            <div><strong>공정 선택</strong></div>
-            <div>
-              <span>OLED 발광층 유기물 증착 공정 중 VTE-03 챔버를 분석 대상으로 정합니다.</span>
-              <details style="margin-top: 0.6rem; cursor: pointer; border: 1px solid rgba(0, 113, 227, 0.15); border-radius: 12px; background: #fff; overflow: hidden;">
-                <summary style="font-size: 0.85rem; color: var(--accent); font-weight: 800; padding: 0.5rem 0.8rem; background: var(--bg-soft); outline: none; list-style: none; display: flex; align-items: center; gap: 0.3rem;">
-                  <span>💡 VTE-03이 무슨 뜻인가요? (원리 보기)</span>
-                </summary>
-                <div style="padding: 0.9rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); border-top: 1px solid rgba(0, 113, 227, 0.1);">
-                  <strong style="color: var(--accent); display: block; margin-bottom: 0.4rem;">VTE (Vacuum Thermal Evaporation - 진공 열 증착기 3호기)</strong>
-                  OLED 디스플레이의 발광층 유기재료를 고진공 챔버 안에서 가열해 기화시켜 기판 위에 얇게 입히는 설비입니다.
-                  <ul style="margin: 0.5rem 0; padding-left: 1.1rem; color: var(--text-secondary);">
-                    <li><strong>Vacuum (진공):</strong> 불순물이 없고 막이 균일하게 덮이도록 우주와 같은 무공기 진공상태 유지</li>
-                    <li><strong>Thermal (열):</strong> 유기물 소스 용기를 300°C 이상 뜨겁게 가열</li>
-                    <li><strong>Evaporation (증착):</strong> 기화된 유기 분자가 유리 기판에 달라붙어 빛나는 화소(Pixel) 형성</li>
-                  </ul>
-                  <img src="vte_diagram.png" alt="VTE 작동 원리 상세 계통도" style="width: 100%; border-radius: 10px; margin-top: 0.8rem; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
-                  <p style="color: var(--text-muted); font-size: 0.75rem; text-align: center; margin-top: 0.4rem;">[VTE 진공 열 증착 설비의 개념도 및 작동 원리]</p>
-                </div>
-              </details>
+        <div class="steps-flow-container" aria-label="설비 데이터 처리 단계">
+          <!-- Step 1 Card -->
+          <div class="step-flow-card">
+            <div class="step-flow-header">
+              <span class="step-flow-badge">Step 1</span>
+              <h3>공정 선택 (Process Selection)</h3>
+              <span class="step-flow-tag">Display · OLED</span>
             </div>
-            <div>
-              <img src="step1.gif" alt="Step 1 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-              <span>Display · OLED</span>
+            <div class="step-flow-body">
+              <div class="step-flow-content">
+                <p class="step-desc">OLED 발광층 유기물 증착 공정 중 VTE-03 챔버를 분석 대상으로 정합니다.</p>
+                
+                <!-- VTE-03 Detailed Explanation & Diagram (No details toggle, fully visible) -->
+                <div class="step-detail-box">
+                  <h4 style="color: var(--accent); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">💡 VTE-03 (Vacuum Thermal Evaporation - 진공 열 증착기 3호기)</h4>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">OLED 디스플레이의 발광층 유기재료를 고진공 챔버 안에서 가열해 기화시켜 기판 위에 얇게 입히는 핵심 설비입니다.</p>
+                  <ul style="margin: 0.6rem 0; padding-left: 1.1rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.4rem;">
+                    <li><strong>Vacuum (진공):</strong> 불순물이 없고 막이 균일하게 덮이도록 우주와 같은 무공기 진공상태를 유지합니다.</li>
+                    <li><strong>Thermal (열):</strong> 유기물 소스 용기를 300°C 이상 뜨겁게 가열하여 기화시킵니다.</li>
+                    <li><strong>Evaporation (증착):</strong> 기화된 유기 분자가 유리 기판에 달라붙어 빛나는 화소(Pixel)를 형성합니다.</li>
+                  </ul>
+                  <div style="text-align: center; margin-top: 1.2rem;">
+                    <img src="vte_diagram.png" alt="VTE 작동 원리 상세 계통도" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[VTE 진공 열 증착 설비의 개념도 및 작동 원리]</p>
+                  </div>
+                </div>
+              </div>
+              <div class="step-flow-visual">
+                <img src="step1.gif" alt="Step 1 Animation" class="step-animation">
+              </div>
             </div>
           </div>
-          <div class="time-row">
-            <div class="time">Step 2</div>
-            <div><strong>정상 모니터링</strong></div>
-            <div>
-              <span>MES/SCADA에서 챔버 압력, 소스 온도, QCM 증착률, 냉각수 유량을 1분 단위로 수집합니다.</span>
-              <details style="margin-top: 0.6rem; cursor: pointer; border: 1px solid rgba(34, 197, 94, 0.15); border-radius: 12px; background: #fff; overflow: hidden;">
-                <summary style="font-size: 0.85rem; color: var(--accent-2); font-weight: 800; padding: 0.5rem 0.8rem; background: #f0fdf4; outline: none; list-style: none; display: flex; align-items: center; gap: 0.3rem;">
-                  <span>💡 생소한 용어 설명 &amp; 1분 데이터 수집 원리</span>
-                </summary>
-                <div style="padding: 0.9rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); border-top: 1px solid rgba(34, 197, 94, 0.1);">
-                  <strong style="color: var(--accent-2); display: block; margin-bottom: 0.4rem;">🔑 핵심 용어 사전</strong>
-                  <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 0.4rem; color: var(--text-secondary); margin-bottom: 0.8rem;">
+
+          <!-- Step 2 Card -->
+          <div class="step-flow-card">
+            <div class="step-flow-header">
+              <span class="step-flow-badge" style="background: #e6fcf5; color: var(--accent-2);">Step 2</span>
+              <h3>정상 모니터링 (Normal Monitoring)</h3>
+              <span class="step-flow-tag">Sensor stream</span>
+            </div>
+            <div class="step-flow-body">
+              <div class="step-flow-content">
+                <p class="step-desc">MES/SCADA에서 챔버 압력, 소스 온도, QCM 증착률, 냉각수 유량을 1분 단위로 수집합니다.</p>
+                
+                <!-- MES/SCADA Detailed Explanation & Diagram (No details toggle, fully visible) -->
+                <div class="step-detail-box" style="border-left-color: var(--accent-2);">
+                  <h4 style="color: var(--accent-2); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">🔑 핵심 용어 사전</h4>
+                  <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 0.4rem; color: var(--text-secondary); margin-bottom: 1rem;">
                     <li><strong>• SCADA (설비 모니터링):</strong> 공장 설비 센서들의 데이터를 종합해 제어하는 감시 시스템</li>
                     <li><strong>• MES (제조 관리 시스템):</strong> 공장 생산 스케줄 및 전체 조작 이력을 추적하는 최상위 소프트웨어</li>
                     <li><strong>• QCM 증착률:</strong> 정밀 진동 센서(Quartz)로 나노그램(ng) 단위 유기물이 얼마나 빠르게 증착되는지 재는 속도</li>
                     <li><strong>• 냉각수 유량:</strong> 초고온 도가니 주변을 시원하게 식혀 열 변형을 막아주는 물의 흐름 속도</li>
                   </ul>
-                  <strong style="color: var(--accent); display: block; margin-top: 0.8rem; margin-bottom: 0.3rem;">⚡ 1분 간격 데이터는 어떻게 수집되나요?</strong>
-                  현장의 다양한 물리 센서들이 시그널(전압, 진동 등)을 발생시키면 PLC/GateWay 장치를 거쳐 <strong>SCADA와 MES 시스템</strong>으로 흘러 들어갑니다. 이 시스템은 1분 간격으로 고정된 시각(예: 12시 00분, 01분, 02분...)에 모든 센서값을 취합하여 <strong>시계열 데이터베이스(Time-Series Database)</strong>에 안정적으로 저장(Historian DB)하게 됩니다.
-                  <img src="data_collection_flow.png" alt="SCADA/MES 1분 데이터 수집 흐름도" style="width: 100%; border-radius: 10px; margin-top: 0.8rem; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
-                  <p style="color: var(--text-muted); font-size: 0.75rem; text-align: center; margin-top: 0.4rem;">[생산 설비 센서에서 시계열 DB로 이어지는 데이터 수집 흐름도]</p>
+                  <h4 style="color: var(--accent); margin-top: 1rem; margin-bottom: 0.4rem; font-weight: 800; font-size: 1rem;">⚡ 1분 간격 데이터는 어떻게 수집되나요?</h4>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">현장의 다양한 물리 센서들이 시그널(전압, 진동 등)을 발생시키면 PLC/GateWay 장치를 거쳐 <strong>SCADA와 MES 시스템</strong>으로 흘러 들어갑니다. 이 시스템은 1분 간격으로 고정된 시각(예: 12시 00분, 01분, 02분...)에 모든 센서값을 취합하여 <strong>시계열 데이터베이스(Time-Series Database)</strong>에 안정적으로 저장(Historian DB)하게 됩니다.</p>
+                  <div style="text-align: center; margin-top: 1.2rem;">
+                    <img src="data_collection_flow.png" alt="SCADA/MES 1분 데이터 수집 흐름도" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[생산 설비 센서에서 시계열 DB로 이어지는 데이터 수집 흐름도]</p>
+                  </div>
                 </div>
-              </details>
-            </div>
-            <div>
-              <img src="step2.gif" alt="Step 2 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-              <span>Sensor stream</span>
-            </div>
-          </div>
-          <div class="time-row">
-            <div class="time">Step 3</div>
-            <div><strong>이상 징후 발생</strong></div>
-            <div><span>소스 온도가 조금씩 상승하고, 챔버 압력이 UCL 근처로 접근하며, QCM 증착률 변동폭이 커집니다.</span></div>
-            <div>
-              <img src="step3.gif" alt="Step 3 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-              <span>Drift · Watch</span>
+              </div>
+              <div class="step-flow-visual">
+                <img src="step2.gif" alt="Step 2 Animation" class="step-animation">
+              </div>
             </div>
           </div>
-          <div class="time-row">
-            <div class="time">Step 4</div>
-            <div><strong>AI 자동 감지</strong></div>
-            <div><span>정상 구간 기준 Center/UCL/LCL, 이동평균, 연속 상승 규칙, 다중 센서 동시 변화 규칙을 적용합니다.</span></div>
-            <div>
-              <img src="step4.gif" alt="Step 4 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-              <span>Rule + AI</span>
+
+          <!-- Step 3 Card -->
+          <div class="step-flow-card">
+            <div class="step-flow-header">
+              <span class="step-flow-badge" style="background: #fff9db; color: var(--warning);">Step 3</span>
+              <h3>이상 징후 발생 (Anomaly Inception)</h3>
+              <span class="step-flow-tag">Drift · Watch</span>
+            </div>
+            <div class="step-flow-body">
+              <div class="step-flow-content">
+                <p class="step-desc">소스 온도가 조금씩 상승하고, 챔버 압력이 UCL 근처로 접근하며, QCM 증착률 변동폭이 커집니다. 비정상적인 열 축적이나 진공 누설의 초기 신호일 수 있습니다.</p>
+              </div>
+              <div class="step-flow-visual">
+                <img src="step3.gif" alt="Step 3 Animation" class="step-animation">
+              </div>
             </div>
           </div>
-          <div class="time-row">
-            <div class="time">Step 5</div>
-            <div><strong>대시보드 리포트</strong></div>
-            <div><span>설비 상태 타일, 관리도, 알림 목록, 전조 패턴 요약, 엔지니어 조치 메모를 한 화면에 구성합니다.</span></div>
-            <div>
-              <img src="step5.gif" alt="Step 5 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-              <span>Dashboard</span>
+
+          <!-- Step 4 Card -->
+          <div class="step-flow-card">
+            <div class="step-flow-header">
+              <span class="step-flow-badge" style="background: #fff0f6; color: var(--danger);">Step 4</span>
+              <h3>AI 자동 감지 (AI Automatic Detection)</h3>
+              <span class="step-flow-tag">Rule + AI</span>
+            </div>
+            <div class="step-flow-body">
+              <div class="step-flow-content">
+                <p class="step-desc">정상 구간 기준 Center/UCL/LCL, 이동평균, 연속 상승 규칙, 다중 센서 동시 변화 규칙을 적용합니다. 이를 통해 엔지니어가 놓치기 쉬운 미세한 이상 패턴을 자동으로 진단해 냅니다.</p>
+              </div>
+              <div class="step-flow-visual">
+                <img src="step4.gif" alt="Step 4 Animation" class="step-animation">
+              </div>
             </div>
           </div>
-          <div class="time-row">
-            <div class="time">Step 6</div>
-            <div><strong>현장 검증</strong></div>
-            <div><span>PM 이력, 재료 교체 시점, 진공 펌프 상태, QCM 센서 보정 이력과 연결해 원인 후보를 좁힙니다.</span></div>
-            <div>
-              <img src="step6.gif" alt="Step 6 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-              <span>Engineer check</span>
+
+          <!-- Step 5 Card -->
+          <div class="step-flow-card">
+            <div class="step-flow-header">
+              <span class="step-flow-badge">Step 5</span>
+              <h3>대시보드 리포트 (Dashboard Reporting)</h3>
+              <span class="step-flow-tag">Dashboard</span>
+            </div>
+            <div class="step-flow-body">
+              <div class="step-flow-content">
+                <p class="step-desc">설비 상태 타일, 관리도, 알림 목록, 전조 패턴 요약, 엔지니어 조치 메모를 한 화면에 구성합니다. 직관적인 UI를 제공하여 현장 대응 속도를 획기적으로 개선합니다.</p>
+              </div>
+              <div class="step-flow-visual">
+                <img src="step5.gif" alt="Step 5 Animation" class="step-animation">
+              </div>
             </div>
           </div>
-          <div class="time-row">
-            <div class="time">Step 7</div>
-            <div><strong>리포트 공유</strong></div>
-            <div><span>장비 담당자와 공정 엔지니어가 같은 리포트를 보고 조치 우선순위를 정합니다.</span></div>
-            <div>
-              <img src="step7.gif" alt="Step 7 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-              <span>Action report</span>
+
+          <!-- Step 6 Card -->
+          <div class="step-flow-card">
+            <div class="step-flow-header">
+              <span class="step-flow-badge" style="background: #f1f3f5; color: var(--text-primary);">Step 6</span>
+              <h3>현장 검증 (Field Verification)</h3>
+              <span class="step-flow-tag">Engineer check</span>
+            </div>
+            <div class="step-flow-body">
+              <div class="step-flow-content">
+                <p class="step-desc">PM 이력, 재료 교체 시점, 진공 펌프 상태, QCM 센서 보정 이력과 연결해 원인 후보를 좁힙니다. 교차 분석을 바탕으로 불량 발생 전 선제적 조치를 수립합니다.</p>
+              </div>
+              <div class="step-flow-visual">
+                <img src="step6.gif" alt="Step 6 Animation" class="step-animation">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 7 Card -->
+          <div class="step-flow-card">
+            <div class="step-flow-header">
+              <span class="step-flow-badge" style="background: #e7f5ff; color: var(--accent);">Step 7</span>
+              <h3>리포트 공유 (Report & Action)</h3>
+              <span class="step-flow-tag">Action report</span>
+            </div>
+            <div class="step-flow-body">
+              <div class="step-flow-content">
+                <p class="step-desc">장비 담당자와 공정 엔지니어가 같은 리포트를 보고 조치 우선순위를 정합니다. 데이터에 기반한 빠르고 투명한 커뮤니케이션으로 공장 다운타임을 최소화합니다.</p>
+              </div>
+              <div class="step-flow-visual">
+                <img src="step7.gif" alt="Step 7 Animation" class="step-animation">
+              </div>
             </div>
           </div>
         </div>
