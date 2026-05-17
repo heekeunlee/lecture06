@@ -15,14 +15,18 @@ colors = {
     'text': '#1e293b'      # Dark slate text
 }
 
-def create_gif(filename, make_frame, frames=20, fps=10):
+def create_gif(filename, make_frame, frames=20, fps=10, polar=False):
     images = []
     for i in range(frames):
-        fig, ax = plt.subplots(figsize=(4.5, 3.4), dpi=110)
+        if polar:
+            fig, ax = plt.subplots(figsize=(4.5, 3.8), dpi=110, subplot_kw=dict(projection='polar'))
+        else:
+            fig, ax = plt.subplots(figsize=(4.5, 3.4), dpi=110)
         
         # Set clean aesthetic backgrounds
         fig.patch.set_facecolor('#f8fafc')
-        ax.set_facecolor('#ffffff')
+        if not polar:
+            ax.set_facecolor('#ffffff')
         
         make_frame(ax, i, frames)
         
@@ -136,21 +140,48 @@ def step4(ax, i, frames):
                 
     ax.legend(loc='lower left', fontsize=7.5, framealpha=0.9)
 
-# Step 5: Dashboard (bars animating)
+# Step 5: Dashboard (radar signature animating)
 def step5(ax, i, frames):
-    ax.set_title("관제 대시보드 실시간 위험도 갱신", fontsize=10, fontweight='bold', pad=8, color=colors['text'])
+    ax.set_title("실시간 다차원 설비 서명 (상태 지문)", fontsize=10, fontweight='bold', pad=12, color=colors['text'])
+    
+    categories = ["냉각유량\n(Flow)", "챔버압력\n(Press)", "QCM속도\n(Rate)", "도가니온도\n(Temp)"]
+    N = len(categories)
+    
+    # Compute angles for each category
+    angles = [n / float(N) * 2 * np.pi for n in range(N)]
+    angles += angles[:1] # close the loop
+    
+    # Data values
     bars = [30, 88, 22, 95]
-    labels = ["냉각유량", "챔버압력", "QCM속도", "도가니온도"]
-    current_bars = [b * (i/frames) for b in bars]
-    ax.bar(labels, current_bars, color=[colors['accent2'], colors['warning'], colors['accent'], colors['danger']], width=0.45)
-    ax.set_ylabel("이상 위험도 (%)", fontsize=8, color='#475569')
-    ax.tick_params(axis='both', which='major', labelsize=8)
+    current_values = [b * (i/frames) for b in bars]
+    current_values += current_values[:1] # close the loop
+    
+    # Plot radar outline & fill
+    ax.plot(angles, current_values, color=colors['danger'], lw=2.2, label="실시간 위험 서명")
+    ax.fill(angles, current_values, color=colors['danger'], alpha=0.25)
+    
+    # Offset starting angle to top (12 o'clock)
+    ax.set_theta_offset(np.pi / 2)
+    ax.set_theta_direction(-1) # clockwise
+    
+    # Set labels
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels(categories, fontsize=8.5, fontweight='bold', color='#475569')
+    
+    # Radial ticks
+    ax.set_rlabel_position(45) # put labels at 45 deg out of the way
+    ax.set_yticks([25, 50, 75, 100])
+    ax.set_yticklabels(["25%", "50%", "75%", "100%"], color="#94a3b8", fontsize=7.5)
     ax.set_ylim(0, 100)
-    ax.grid(True, axis='y', linestyle=':', alpha=0.5)
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('#94a3b8')
-    ax.spines['left'].set_color('#94a3b8')
+    
+    # Custom grid style
+    ax.grid(True, color="#cbd5e1", linestyle="--", linewidth=0.7)
+    
+    # Add a normal range boundary polygon (e.g. at 40% risk for all variables)
+    normal_boundary = [40] * (N + 1)
+    ax.plot(angles, normal_boundary, color=colors['accent2'], lw=1.5, ls=':', label="정상 관리 한계")
+    
+    ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.28), fontsize=8, framealpha=0.9, ncol=2)
 
 # Step 6: Engineer check (magnifying glass effect)
 def step6(ax, i, frames):
@@ -207,6 +238,6 @@ if __name__ == '__main__':
     create_gif('step2.gif', step2, frames=20, fps=10)
     create_gif('step3.gif', step3, frames=20, fps=10)
     create_gif('step4.gif', step4, frames=20, fps=10)
-    create_gif('step5.gif', step5, frames=20, fps=10)
+    create_gif('step5.gif', step5, frames=20, fps=10, polar=True)
     create_gif('step6.gif', step6, frames=20, fps=10)
     create_gif('step7.gif', step7, frames=20, fps=10)
