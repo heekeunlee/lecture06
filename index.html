@@ -1,0 +1,1223 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lecture 06 · OLED 증착 설비 이상 징후 감지 및 실시간 모니터링</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --bg-soft: #f0f7ff;
+        --accent: #0071e3;
+        --accent-2: #22c55e;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --text-primary: #1d1d1f;
+        --text-secondary: #86868b;
+        --text-muted: #86868b;
+        --border: rgba(0, 0, 0, 0.1);
+        --shadow: 0 18px 46px rgba(0, 0, 0, 0.05);
+        --font-main: 'Outfit', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --font-content: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-main);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .app-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+      }
+
+      .main-header {
+        margin-bottom: 6rem;
+      }
+
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 4rem;
+      }
+
+      .logo-group {
+        display: flex;
+        align-items: center;
+      }
+
+      .header-logo {
+        height: 28px;
+        width: auto;
+        opacity: 0.9;
+      }
+
+      .header-tag {
+        font-family: var(--font-main);
+        font-size: 1.1rem;
+        color: var(--text-primary);
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-align: right;
+        max-width: 360px;
+      }
+
+      .hero-section {
+        text-align: center;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin: 0 auto 1.5rem;
+        max-width: 1050px;
+        word-break: keep-all;
+      }
+
+      .subtitle {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        font-weight: 400;
+        max-width: 860px;
+        margin: 0 auto;
+        word-break: keep-all;
+      }
+
+      .lesson-meta {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.9rem;
+      }
+
+      .lesson-meta span,
+      .pill {
+        border: 1px solid var(--border);
+        background: var(--bg-secondary);
+        border-radius: 999px;
+        padding: 0.55rem 0.9rem;
+        font-size: 0.9rem;
+        font-weight: 850;
+      }
+
+      .hero-live-board {
+        max-width: 930px;
+        margin: 0 auto;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .board-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        background: #f5f5f7;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .board-header strong {
+        font-size: 1rem;
+      }
+
+      .status-live {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: var(--danger);
+        font-weight: 900;
+      }
+
+      .status-live i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--danger);
+        animation: pulse 1.3s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.7); opacity: 0.35; }
+      }
+
+      .hero-chart-wrap {
+        padding: 1.4rem;
+      }
+
+      svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .axis-line {
+        stroke: #d1d5db;
+        stroke-width: 2;
+      }
+
+      .center-line {
+        stroke: #9ca3af;
+        stroke-width: 2;
+        stroke-dasharray: 6 8;
+      }
+
+      .ucl-line {
+        stroke: var(--danger);
+        stroke-width: 2.5;
+        stroke-dasharray: 9 7;
+      }
+
+      .lcl-line {
+        stroke: var(--accent);
+        stroke-width: 2;
+        stroke-dasharray: 9 7;
+      }
+
+      .trend-line {
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .moving-line {
+        fill: none;
+        stroke: #111827;
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .normal-dot { fill: var(--accent); }
+      .watch-dot { fill: var(--warning); }
+      .alert-dot { fill: var(--danger); }
+
+      .chart-text {
+        fill: #6b7280;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .chart-alert {
+        fill: var(--danger);
+        font-size: 14px;
+        font-weight: 950;
+      }
+
+      section {
+        margin-bottom: 8rem;
+      }
+
+      .teaching-section {
+        position: relative;
+      }
+
+      .teaching-section::before {
+        content: "";
+        position: absolute;
+        left: -1.8rem;
+        top: 0.25rem;
+        width: 6px;
+        height: 4.5rem;
+        border-radius: 999px;
+        background: linear-gradient(180deg, var(--accent), #22c55e);
+      }
+
+      .section-label {
+        width: fit-content;
+        border: 1px solid #cfd6df;
+        background: #ffffff;
+        border-radius: 999px;
+        padding: 0.34rem 0.75rem;
+        font-size: 0.95rem;
+        font-weight: 900;
+        color: #111827;
+        letter-spacing: 0.01em;
+        margin-bottom: 0.9rem;
+        display: block;
+      }
+
+      .section-label .num {
+        color: var(--accent);
+      }
+
+      h2 {
+        font-size: clamp(1.4rem, 2.2vw, 1.65rem);
+        line-height: 1.15;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        word-break: keep-all;
+        max-width: 1050px;
+      }
+
+      h2 mark {
+        background: linear-gradient(180deg, transparent 56%, #fef08a 56%);
+        color: inherit;
+        padding: 0 0.08em;
+      }
+
+      .section-intro {
+        max-width: 860px;
+        margin-top: 1rem;
+        color: var(--text-secondary);
+        font-family: var(--font-content);
+        font-size: 1.12rem;
+        line-height: 1.7;
+        word-break: keep-all;
+      }
+
+      .scene-note {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 1rem;
+        max-width: 860px;
+        margin-top: 1.2rem;
+        padding: 1rem 1.15rem;
+        background: #f0f7ff;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+      }
+
+      .scene-note strong {
+        color: var(--accent);
+        font-size: 0.94rem;
+      }
+
+      .scene-note p {
+        color: var(--text-secondary);
+        font-family: var(--font-content);
+        font-size: 0.98rem;
+        word-break: keep-all;
+      }
+
+      .grid-3,
+      .grid-2 {
+        display: grid;
+        gap: 1rem;
+        margin-top: 2.25rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        background: var(--bg-secondary);
+        border-radius: 18px;
+        padding: 1.35rem;
+      }
+
+      .card h3 {
+        font-size: 1.2rem;
+        line-height: 1.25;
+        margin-bottom: 0.7rem;
+        word-break: keep-all;
+      }
+
+      .card p,
+      .card li {
+        color: var(--text-secondary);
+        font-family: var(--font-content);
+        font-size: 0.98rem;
+        line-height: 1.65;
+        word-break: keep-all;
+      }
+
+      .card ul {
+        list-style: none;
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .card li::before {
+        content: "✓";
+        color: var(--accent);
+        font-weight: 950;
+        margin-right: 0.45rem;
+      }
+
+      .time-table {
+        margin-top: 2rem;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .time-row {
+        display: grid;
+        grid-template-columns: 130px 1.2fr 2fr 1.1fr;
+        border-bottom: 1px solid var(--border);
+        min-height: 92px;
+      }
+
+      .time-row:last-child {
+        border-bottom: 0;
+      }
+
+      .time-row > div {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .time-row .time {
+        color: var(--accent);
+        font-weight: 950;
+        font-size: 1.1rem;
+      }
+
+      .time-row strong {
+        font-size: 1.02rem;
+        line-height: 1.35;
+        word-break: keep-all;
+      }
+
+      .time-row span {
+        color: var(--text-secondary);
+        font-size: 0.92rem;
+        line-height: 1.55;
+        word-break: keep-all;
+      }
+
+      .compare-flow {
+        display: grid;
+        gap: 1.2rem;
+        margin-top: 2.2rem;
+      }
+
+      .case-panel {
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .case-panel-head {
+        padding: 1.1rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+        background: #f5f5f7;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .case-panel-head span {
+        color: var(--accent);
+        font-weight: 950;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .case-panel-head strong {
+        font-size: 1.05rem;
+        word-break: keep-all;
+      }
+
+      .case-body {
+        padding: 1.3rem;
+      }
+
+      .file-stack {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+      }
+
+      .file-card {
+        background: #f8f9fa;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0.9rem;
+      }
+
+      .file-card strong {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .file-card span {
+        color: var(--text-secondary);
+        font-size: 0.82rem;
+      }
+
+      .mini-bars {
+        height: 34px;
+        display: grid;
+        grid-template-columns: repeat(18, 1fr);
+        gap: 3px;
+        align-items: end;
+        margin-top: 0.75rem;
+      }
+
+      .mini-bars i {
+        display: block;
+        height: 45%;
+        border-radius: 5px 5px 0 0;
+        background: #cfd8e3;
+      }
+
+      .mini-bars i:nth-child(3n) { height: 70%; }
+      .mini-bars i:nth-child(5n) { height: 85%; background: #fbbf24; }
+      .mini-bars i.hot { height: 96%; background: var(--danger); }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.7rem;
+        margin-top: 1rem;
+      }
+
+      .metric {
+        background: #f5f5f7;
+        border-radius: 14px;
+        padding: 0.9rem;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.35rem;
+        line-height: 1;
+      }
+
+      .metric span {
+        color: var(--text-secondary);
+        font-size: 0.84rem;
+      }
+
+      .prompt-box {
+        background: #111827;
+        color: #fff;
+        border-radius: 18px;
+        padding: 1.25rem;
+        line-height: 1.75;
+        word-break: keep-all;
+        font-size: 1rem;
+      }
+
+      .prompt-box mark {
+        color: #fff;
+        background: rgba(0, 113, 227, 0.75);
+        border-radius: 6px;
+        padding: 0.08rem 0.28rem;
+      }
+
+      .rule-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .rule-grid div {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 14px;
+        padding: 0.8rem;
+      }
+
+      .rule-grid strong {
+        display: block;
+        color: #93c5fd;
+        font-size: 0.86rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .rule-grid span {
+        color: #e5e7eb;
+        font-size: 0.86rem;
+      }
+
+      .dashboard {
+        display: grid;
+        grid-template-columns: 1.25fr 0.85fr;
+        gap: 1rem;
+      }
+
+      .monitor-card {
+        border: 1px solid var(--border);
+        background: #f8f9fa;
+        border-radius: 18px;
+        padding: 1rem;
+      }
+
+      .monitor-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 0.8rem;
+      }
+
+      .monitor-top span {
+        color: var(--text-secondary);
+        font-size: 0.86rem;
+        font-weight: 850;
+      }
+
+      .status-chip {
+        border-radius: 999px;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.8rem;
+        font-weight: 950;
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+
+      .alert-list {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .alert-card {
+        border: 1px solid rgba(239, 68, 68, 0.22);
+        background: #fff7f7;
+        border-radius: 16px;
+        padding: 0.95rem;
+      }
+
+      .alert-card strong {
+        display: block;
+        color: #991b1b;
+        margin-bottom: 0.35rem;
+      }
+
+      .alert-card p {
+        color: #57534e;
+        font-size: 0.92rem;
+        line-height: 1.55;
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .status-tile {
+        border: 1px solid var(--border);
+        background: #fff;
+        border-radius: 16px;
+        padding: 1rem;
+      }
+
+      .status-tile strong {
+        display: block;
+        margin-bottom: 0.3rem;
+      }
+
+      .status-tile span {
+        font-size: 0.84rem;
+        color: var(--text-secondary);
+      }
+
+      .status-tile.normal { border-color: rgba(34, 197, 94, 0.35); }
+      .status-tile.watch { border-color: rgba(245, 158, 11, 0.45); }
+      .status-tile.ooc { border-color: rgba(239, 68, 68, 0.48); background: #fff7f7; }
+
+      .script-map {
+        display: grid;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .script-scene {
+        display: grid;
+        grid-template-columns: 120px 1.1fr 1.5fr 1fr;
+        gap: 1rem;
+        align-items: start;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 1rem;
+      }
+
+      .script-scene .scene-time {
+        color: var(--accent);
+        font-weight: 950;
+      }
+
+      .script-scene strong {
+        line-height: 1.35;
+        word-break: keep-all;
+      }
+
+      .script-scene span,
+      .script-scene p {
+        color: var(--text-secondary);
+        font-size: 0.92rem;
+        line-height: 1.55;
+        word-break: keep-all;
+      }
+
+      .checklist {
+        margin-top: 1.6rem;
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .check-item {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1rem;
+        display: grid;
+        grid-template-columns: 34px 1fr;
+        gap: 0.8rem;
+        align-items: start;
+      }
+
+      .check-item i {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--accent);
+        color: #fff;
+        font-style: normal;
+        font-weight: 950;
+        font-size: 0.82rem;
+      }
+
+      .check-item strong {
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+
+      .check-item span {
+        color: var(--text-secondary);
+        font-size: 0.94rem;
+      }
+
+      .copy-panel {
+        margin-top: 2rem;
+        border: 1px solid rgba(0, 113, 227, 0.25);
+        background: #f0f7ff;
+        border-radius: 22px;
+        padding: 1.2rem;
+      }
+
+      .copy-panel pre {
+        white-space: pre-wrap;
+        word-break: keep-all;
+        font-family: inherit;
+        font-size: 0.98rem;
+        line-height: 1.75;
+        color: #111827;
+      }
+
+      .closing-card {
+        padding: 2rem;
+        border-radius: 28px;
+        background: #111827;
+        color: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .closing-card h2 {
+        color: #fff;
+      }
+
+      .closing-card p {
+        max-width: 860px;
+        margin-top: 1rem;
+        color: #d1d5db;
+        font-size: 1.1rem;
+        word-break: keep-all;
+      }
+
+      .footer {
+        padding: 4rem 0 2rem;
+        color: var(--text-muted);
+        text-align: center;
+        font-weight: 800;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 860px) {
+        .app-container {
+          padding: 1.2rem;
+        }
+
+        .main-header {
+          margin-bottom: 5rem;
+        }
+
+        .header-top,
+        .case-panel-head,
+        .monitor-top {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .header-top {
+          gap: 1rem;
+          margin-bottom: 3rem;
+        }
+
+        .header-tag {
+          text-align: left;
+        }
+
+        .grid-3,
+        .grid-2,
+        .file-stack,
+        .metrics,
+        .rule-grid,
+        .dashboard,
+        .status-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .time-row,
+        .script-scene,
+        .scene-note {
+          grid-template-columns: 1fr;
+        }
+
+        .teaching-section::before {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app-container">
+      <header class="main-header">
+        <div class="header-top">
+          <div class="logo-group" aria-label="내일도 렛유인 Edu">
+            <img src="logo.png" alt="내일도 렛유인 Edu" class="header-logo" />
+          </div>
+          <div class="header-tag">
+            AI를 지휘하는 스마트한 엔지니어의 시작
+          </div>
+        </div>
+
+        <div class="hero-section">
+          <h1>Ch.6OLED 증착 설비 이상 징후 감지 및 실시간 모니터링</h1>
+          <p class="subtitle">
+            OLED 유기물 증착 챔버의 온도·진공도·증착률 로그를 따라가며 이상 징후를 AI가 자동 감지하고 대시보드로 리포트하게 만듭니다.
+          </p>
+          <div class="lesson-meta">
+            <span>40분</span>
+            <span>제조 AI 실습</span>
+            <span>실습 포함</span>
+            <span>결과물: OLED 증착 설비 이상 감지 대시보드</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="overview-section reveal">
+        <span class="section-label"><span class="num">01.</span> 오프닝 및 학습목표</span>
+        <h2>오늘 여러분은 OLED 유기물 증착 설비의 센서 로그를 AI 작업지시서로 정리해 <mark>이상 징후 대시보드</mark>로 바꾸는 흐름을 배웁니다.</h2>
+        <p class="section-intro">
+          하나의 증착 챔버를 기준으로 공정이 어떻게 모니터링되는지, 이상치가 발생하면 센서 로그에 어떻게 나타나는지,
+          그 신호를 AI가 자동 감지하고 엔지니어용 대시보드로 보고하게 하려면 무엇을 지시해야 하는지 순서대로 다룹니다.
+        </p>
+        <div class="scene-note">
+          <strong>강의 스토리</strong>
+          <p>설비 하나를 정하고, 정상 모니터링 화면을 본 다음, 이상 징후가 어떻게 시작되는지 추적하고, 마지막에 AI 감지 규칙과 리포트 화면으로 연결합니다.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>학습목표 1</h3>
+            <p>OLED 유기물 증착 챔버가 어떤 센서로 모니터링되는지 이해하고, 시간축 기준 데이터 구조를 설명합니다.</p>
+          </article>
+          <article class="card">
+            <h3>학습목표 2</h3>
+            <p>챔버 압력 상승, 소스 온도 드리프트, 증착률 흔들림이 이상 징후로 나타나는 방식을 해석합니다.</p>
+          </article>
+          <article class="card">
+            <h3>학습목표 3</h3>
+            <p>AI 자동 감지 규칙과 대시보드 리포트 구성을 작업지시서로 작성합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="definition-section reveal">
+        <span class="section-label"><span class="num">02.</span> 공정과 설비 설정</span>
+        <h2>오늘의 주인공은 <mark>OLED 유기물 증착 챔버</mark>입니다.</h2>
+        <p class="section-intro">
+          OLED 발광층을 만들 때 유기 재료를 진공 챔버 안에서 가열해 기화시키고, 기판 위에 얇게 증착합니다.
+          이때 소스 온도, 챔버 압력, QCM 증착률, 냉각수 유량이 흔들리면 막 두께와 휘도 균일도가 같이 흔들릴 수 있습니다.
+        </p>
+        <div style="margin: 2rem 0; text-align: center;">
+          <img src="oled_chamber.png" alt="OLED 증착 설비 (VTE 챔버) 실제 사진" style="max-width: 100%; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid var(--border);">
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.8rem;">OLED 발광층 유기물 증착 챔버 (VTE) 실제 형태</p>
+        </div>
+        <div class="time-table" aria-label="설비 데이터 처리 단계">
+          <div class="time-row">
+            <div class="time">Step 1</div>
+            <div><strong>공정 선택</strong></div>
+            <div><span>OLED 발광층 유기물 증착 공정 중 VTE-03 챔버를 분석 대상으로 정합니다.</span></div>
+            <div>
+              <img src="step1.gif" alt="Step 1 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+              <span>Display · OLED</span>
+            </div>
+          </div>
+          <div class="time-row">
+            <div class="time">Step 2</div>
+            <div><strong>정상 모니터링</strong></div>
+            <div><span>MES/SCADA에서 챔버 압력, 소스 온도, QCM 증착률, 냉각수 유량을 1분 단위로 수집합니다.</span></div>
+            <div>
+              <img src="step2.gif" alt="Step 2 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+              <span>Sensor stream</span>
+            </div>
+          </div>
+          <div class="time-row">
+            <div class="time">Step 3</div>
+            <div><strong>이상 징후 발생</strong></div>
+            <div><span>소스 온도가 조금씩 상승하고, 챔버 압력이 UCL 근처로 접근하며, QCM 증착률 변동폭이 커집니다.</span></div>
+            <div>
+              <img src="step3.gif" alt="Step 3 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+              <span>Drift · Watch</span>
+            </div>
+          </div>
+          <div class="time-row">
+            <div class="time">Step 4</div>
+            <div><strong>AI 자동 감지</strong></div>
+            <div><span>정상 구간 기준 Center/UCL/LCL, 이동평균, 연속 상승 규칙, 다중 센서 동시 변화 규칙을 적용합니다.</span></div>
+            <div>
+              <img src="step4.gif" alt="Step 4 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+              <span>Rule + AI</span>
+            </div>
+          </div>
+          <div class="time-row">
+            <div class="time">Step 5</div>
+            <div><strong>대시보드 리포트</strong></div>
+            <div><span>설비 상태 타일, 관리도, 알림 목록, 전조 패턴 요약, 엔지니어 조치 메모를 한 화면에 구성합니다.</span></div>
+            <div>
+              <img src="step5.gif" alt="Step 5 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+              <span>Dashboard</span>
+            </div>
+          </div>
+          <div class="time-row">
+            <div class="time">Step 6</div>
+            <div><strong>현장 검증</strong></div>
+            <div><span>PM 이력, 재료 교체 시점, 진공 펌프 상태, QCM 센서 보정 이력과 연결해 원인 후보를 좁힙니다.</span></div>
+            <div>
+              <img src="step6.gif" alt="Step 6 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+              <span>Engineer check</span>
+            </div>
+          </div>
+          <div class="time-row">
+            <div class="time">Step 7</div>
+            <div><strong>리포트 공유</strong></div>
+            <div><span>장비 담당자와 공정 엔지니어가 같은 리포트를 보고 조치 우선순위를 정합니다.</span></div>
+            <div>
+              <img src="step7.gif" alt="Step 7 Animation" style="width: 100px; border-radius: 8px; margin-bottom: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+              <span>Action report</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <span class="section-label"><span class="num">03.</span> 현재 모니터링 방식</span>
+        <h2>정상 상태에서는 챔버 센서가 <mark>조용한 범위 안에서 움직입니다</mark>.</h2>
+        <p class="section-intro">
+          VTE-03 설비는 1분마다 센서를 남기고, 운영자는 화면에서 현재값과 알람만 확인합니다.
+          문제는 작은 드리프트가 알람 전에는 정상 노이즈처럼 보인다는 점입니다.
+        </p>
+        <div class="case-panel">
+          <div class="case-panel-head">
+            <span>Normal Monitoring</span>
+            <strong>VTE-03 · OLED 유기물 증착 챔버 · 1분 센서 로그</strong>
+          </div>
+          <div class="case-body">
+            <div class="file-stack">
+              <div class="file-card">
+                <strong>VTE03_SOURCE_TEMP.csv</strong>
+                <span>소스 온도 · 183~187°C 정상 범위</span>
+                <div class="mini-bars">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+              <div class="file-card">
+                <strong>VTE03_CHAMBER_PRESS.csv</strong>
+                <span>챔버 압력 · 1.0e-6 Torr 부근</span>
+                <div class="mini-bars">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+              <div class="file-card">
+                <strong>VTE03_QCM_RATE.csv</strong>
+                <span>증착률 · 1.20 Å/s 목표</span>
+                <div class="mini-bars">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+            </div>
+            <div class="metrics">
+              <div class="metric"><strong>1분</strong><span>로그 주기</span></div>
+              <div class="metric"><strong>4종</strong><span>핵심 센서</span></div>
+              <div class="metric"><strong>UCL</strong><span>관리 상한</span></div>
+              <div class="metric"><strong>알람 전</strong><span>드리프트 구간</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="scene-note">
+          <strong>현장 포인트</strong>
+          <p>운영 화면은 현재값을 잘 보여주지만, “최근 30분 동안 같이 흔들린 센서 조합”을 자동으로 설명해주지는 않습니다.</p>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <span class="section-label"><span class="num">04.</span> 이상 징후가 나타나는 방식</span>
+        <h2>이상은 갑자기 터지기보다 <mark>센서 조합의 작은 변화</mark>로 먼저 나타납니다.</h2>
+        <p class="section-intro">
+          예를 들어 13:05부터 소스 온도가 천천히 올라가고, 13:18에 챔버 압력이 UCL 근처까지 접근하며,
+          13:22에는 QCM 증착률이 목표값에서 흔들리기 시작합니다. 이 흐름이 이어지면 막 두께 편차와 휘도 불균일로 연결될 수 있습니다.
+        </p>
+        <div class="grid-3">
+          <article class="card">
+            <h3>1단계 · 소스 온도 드리프트</h3>
+            <p>순간 알람은 아니지만 5-point 이동평균이 20분 이상 한 방향으로 올라갑니다.</p>
+          </article>
+          <article class="card">
+            <h3>2단계 · 챔버 압력 Watch</h3>
+            <p>진공도가 흔들리며 압력이 관리상한 근처에 머뭅니다. 소스 온도 변화와 같은 시간대인지 봐야 합니다.</p>
+          </article>
+          <article class="card">
+            <h3>3단계 · 증착률 OOC</h3>
+            <p>QCM 증착률이 UCL/LCL 밖으로 벗어나면 OOC로 보고, 해당 lot과 설비 상태를 즉시 연결합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <span class="section-label"><span class="num">05.</span> AI 자동감지 설계</span>
+        <h2>AI에게는 “이상 찾아줘”가 아니라 <mark>공정 맥락, 센서, 판정 규칙</mark>을 같이 줍니다.</h2>
+        <p class="section-intro">
+          AI는 원인을 단정하는 도구가 아니라, 정해진 기준으로 로그를 정렬하고, Watch/OOC를 표시하고,
+          어떤 센서가 먼저 흔들렸는지 설명하는 도구로 설계해야 합니다.
+        </p>
+        <div class="prompt-box">
+          OLED 유기물 증착 설비 VTE-03의 1분 센서 로그를 분석해줘.
+          컬럼은 <mark>timestamp, chamber_pressure, source_temperature, qcm_rate, cooling_water_flow, lot_id</mark>야.
+          각 센서를 같은 시간축으로 정렬하고 <mark>5-point 이동평균</mark>을 계산해줘.
+          최근 정상 lot 20개를 기준으로 <mark>Center, UCL, LCL</mark>을 계산하고,
+          UCL/LCL을 벗어나면 OOC, UCL의 85% 이상에 3회 연속 접근하면 Watch로 표시해줘.
+          특히 <mark>소스 온도 상승 → 챔버 압력 상승 → QCM 증착률 흔들림</mark> 순서가 보이면 전조 패턴으로 요약해줘.
+          결과는 엔지니어가 바로 볼 수 있는 대시보드와 일일 리포트 형식으로 만들어줘.
+          <div class="rule-grid">
+            <div><strong>데이터</strong><span>VTE-03, lot, 센서 로그</span></div>
+            <div><strong>계산</strong><span>이동평균, Center, UCL/LCL</span></div>
+            <div><strong>판정</strong><span>Normal, Watch, OOC</span></div>
+            <div><strong>리포트</strong><span>대시보드, 알림, 조치 메모</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <span class="section-label"><span class="num">06.</span> 대시보드 리포트</span>
+        <h2>After: AI 산출물은 <mark>OLED 증착 담당자가 바로 판단할 화면</mark>이어야 합니다.</h2>
+        <p class="section-intro">
+          대시보드는 예쁜 차트가 아니라 업무 화면입니다. 어떤 설비가 위험한지, 어느 lot에서 시작됐는지,
+          어떤 센서가 먼저 흔들렸는지, 담당자가 무엇을 확인해야 하는지가 한 번에 보여야 합니다.
+        </p>
+        <div class="case-panel">
+          <div class="case-panel-head">
+            <span>After</span>
+            <strong>VTE-03 관리도 + 설비 상태 타일 + AI 알림 카드 + 조치 메모</strong>
+          </div>
+          <div class="case-body">
+            <div class="dashboard">
+              <div class="monitor-card">
+                <div class="monitor-top">
+                  <div>
+                    <span>Control Chart</span>
+                    <h3>VTE-03 QCM Rate / Moving Average</h3>
+                  </div>
+                  <div class="status-chip">OOC</div>
+                </div>
+                <svg viewBox="0 0 640 300" role="img" aria-label="대시보드 관리도">
+                  <line x1="50" y1="70" x2="600" y2="70" class="ucl-line" />
+                  <line x1="50" y1="150" x2="600" y2="150" class="center-line" />
+                  <line x1="50" y1="230" x2="600" y2="230" class="lcl-line" />
+                  <polyline points="60,220 110,212 160,205 210,190 260,178 310,160 360,140 410,112 460,82 510,62 560,76 610,100" class="trend-line" />
+                  <polyline points="60,222 110,216 160,208 210,196 260,184 310,171 360,154 410,132 460,108 510,84 560,73 610,78" class="moving-line" />
+                  <circle cx="460" cy="82" r="8" class="watch-dot" />
+                  <circle cx="510" cy="62" r="10" class="alert-dot" />
+                  <circle cx="560" cy="76" r="10" class="alert-dot" />
+                  <text x="55" y="58" class="chart-alert">UCL</text>
+                  <text x="500" y="42" class="chart-alert">13:22 OOC</text>
+                </svg>
+              </div>
+              <div class="alert-list">
+                <div class="alert-card">
+                  <strong>13:22 · QCM Rate OOC</strong>
+                  <p>증착률 이동평균이 LCL 아래로 벗어났습니다. 25분 전부터 소스 온도 상승과 챔버 압력 Watch가 함께 관찰됩니다.</p>
+                </div>
+                <div class="alert-card">
+                  <strong>13:18 · Chamber Pressure Watch</strong>
+                  <p>챔버 압력이 UCL의 85% 이상에 3회 연속 접근했습니다. 진공 펌프와 배기 밸브 상태를 확인하세요.</p>
+                </div>
+                <div class="alert-card">
+                  <strong>조치 메모</strong>
+                  <p>유기 재료 교체 시점, QCM 센서 보정, 챔버 클리닝 이력, 냉각수 유량을 우선 확인합니다.</p>
+                </div>
+              </div>
+            </div>
+            <div class="status-grid">
+              <div class="status-tile normal"><strong>VTE-01</strong><span>Normal · 안정</span></div>
+              <div class="status-tile watch"><strong>VTE-02</strong><span>Watch · 압력 상승</span></div>
+              <div class="status-tile ooc"><strong>VTE-03</strong><span>OOC · 즉시 확인</span></div>
+              <div class="status-tile normal"><strong>VTE-04</strong><span>Normal · 안정</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="teaching-section reveal">
+        <span class="section-label"><span class="num">07.</span> 전조 패턴 해석</span>
+        <h2>OOC가 찍힌 순간보다 <mark>그 전 30분의 공정 흐름</mark>을 먼저 봐야 합니다.</h2>
+        <div class="script-map">
+          <div class="script-scene">
+            <div class="scene-time">1</div>
+            <strong>소스 온도 시작점</strong>
+            <p>소스 온도 이동평균이 언제부터 한 방향으로 올라갔는지 확인합니다.</p>
+            <span>패턴: 온도 드리프트</span>
+          </div>
+          <div class="script-scene">
+            <div class="scene-time">2</div>
+            <strong>챔버 압력 동조</strong>
+            <p>온도 상승 뒤 챔버 압력이 같은 시간대에 UCL 근처로 접근했는지 비교합니다.</p>
+            <span>패턴: 압력 Watch</span>
+          </div>
+          <div class="script-scene">
+            <div class="scene-time">3</div>
+            <strong>증착률 영향</strong>
+            <p>QCM 증착률이 흔들린 시점과 압력 변화가 연결되는지 확인합니다.</p>
+            <span>패턴: Rate OOC</span>
+          </div>
+          <div class="script-scene">
+            <div class="scene-time">4</div>
+            <strong>현장 이력 연결</strong>
+            <p>유기 재료 교체, 챔버 클리닝, QCM 보정, 진공 펌프 PM 이력을 같은 시간대에 놓고 후보를 좁힙니다.</p>
+            <span>패턴: 이벤트 매칭</span>
+          </div>
+          <div class="script-scene">
+            <div class="scene-time">5</div>
+            <strong>조치 메모 작성</strong>
+            <p>AI 결과는 원인 단정이 아니라, 담당자가 먼저 확인할 챔버·lot·센서·시간대를 정리하는 용도로 씁니다.</p>
+            <span>패턴: 우선순위</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="teaching-section reveal">
+        <span class="section-label"><span class="num">08.</span> 엔지니어 검증</span>
+        <h2>AI 결과는 최종 판단이 아니라 <mark>OLED 증착 담당자가 검증할 후보 목록</mark>입니다.</h2>
+        <p class="section-intro">
+          AI가 VTE-03을 OOC로 표시했더라도, 현장 엔지니어는 반드시 설비 이력과 품질 결과를 연결해 확인해야 합니다.
+        </p>
+        <div class="checklist">
+          <div class="check-item"><i>1</i><div><strong>센서 결측과 시간축 정렬</strong><span>챔버 압력, 소스 온도, QCM 증착률의 timestamp가 같은 lot 기준으로 정렬됐는지 확인합니다.</span></div></div>
+          <div class="check-item"><i>2</i><div><strong>유기 재료 교체 이력</strong><span>재료 보트 교체 직후의 온도 안정화 과정이 이상으로 잘못 잡힌 것은 아닌지 확인합니다.</span></div></div>
+          <div class="check-item"><i>3</i><div><strong>챔버 클리닝과 진공 펌프 PM</strong><span>최근 클리닝, 배기 밸브, 펌프 정비 이력이 압력 Watch와 연결되는지 봅니다.</span></div></div>
+          <div class="check-item"><i>4</i><div><strong>QCM 센서 보정</strong><span>실제 증착률 이상인지, QCM 센서 보정이나 수명 이슈인지 분리합니다.</span></div></div>
+          <div class="check-item"><i>5</i><div><strong>막 두께·휘도 결과 연결</strong><span>OOC lot이 실제 두께 편차, 휘도 얼룩, 수율 저하와 연결되는지 후속 데이터를 확인합니다.</span></div></div>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <span class="section-label"><span class="num">09.</span> 실습용 프롬프트</span>
+        <h2>수강생은 이 템플릿으로 <mark>OLED 증착 설비 대시보드</mark>를 만들 수 있습니다.</h2>
+        <div class="copy-panel">
+          <pre>OLED 유기물 증착 설비 VTE-03의 센서 로그를 분석해줘.
+
+데이터에는 timestamp, equipment_id, lot_id, source_temperature, chamber_pressure, qcm_rate, cooling_water_flow 컬럼이 있다.
+먼저 lot_id와 timestamp 기준으로 시간축을 정렬하고, 결측치와 단위 이상을 점검해줘.
+각 센서에는 5-point 이동평균을 적용해줘.
+최근 정상 lot 20개를 기준으로 Center, UCL, LCL을 계산해줘.
+UCL/LCL을 벗어난 시점은 OOC로 표시하고, UCL의 85% 이상에 3회 연속 접근하면 Watch로 표시해줘.
+소스 온도 상승 → 챔버 압력 상승 → QCM 증착률 흔들림 순서가 보이면 전조 패턴으로 요약해줘.
+
+결과는 다음 화면으로 만들어줘.
+1. VTE 설비별 Normal / Watch / OOC 상태 타일
+2. 소스 온도, 챔버 압력, QCM 증착률 관리도
+3. lot_id별 OOC 발생 시점 목록
+4. OOC 30분 전부터의 전조 패턴 요약
+5. 유기 재료 교체, 챔버 클리닝, QCM 보정, 진공 펌프 PM 확인 메모
+6. 일일 리포트 형태의 요약 문장</pre>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="closing-card">
+          <h2>오늘의 결론: AI는 원인을 단정하지 않습니다. OLED 증착 설비에서 먼저 봐야 할 신호를 정리합니다.</h2>
+          <p>
+            06강의 핵심은 추상적인 이상 탐지가 아니라, 하나의 공정과 설비를 잡고 정상 모니터링, 이상 징후,
+            AI 자동 감지, 대시보드 리포트까지 연결하는 것입니다. VTE-03의 소스 온도, 챔버 압력, QCM 증착률을
+            같은 시간축에 놓고 기준을 명확히 주면 AI는 엔지니어가 조치할 수 있는 화면과 리포트를 만들어줍니다.
+          </p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Lecture 06 · OLED Evaporation Equipment Anomaly Detection & Realtime Monitoring
+      </footer>
+    </main>
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
