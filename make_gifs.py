@@ -183,34 +183,45 @@ def step5(ax, i, frames):
     
     ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.28), fontsize=8, framealpha=0.9, ncol=2)
 
-# Step 6: Engineer check (magnifying glass effect)
+# Step 6: Engineer check (Hypothesis verification profile chart)
 def step6(ax, i, frames):
-    ax.set_title("정비 히스토리 정밀 매칭 (패턴 비교)", fontsize=10, fontweight='bold', pad=8, color=colors['text'])
-    x = np.linspace(0, 10, 100)
-    y = 1.2 + np.sin(x*1.5) * 0.2
-    ax.plot(x, y, c='#64748b', lw=1.5, label="정상 이력 패턴")
+    ax.set_title("실시간 결함 요인 매칭 및 이력 검증", fontsize=10, fontweight='bold', pad=12, color=colors['text'])
     
-    cx = 2 + (i/frames)*6
-    cy = 1.2 + np.sin(cx*1.5) * 0.2
+    hypotheses = [
+        "QCM 센서 마모\n(QCM Wearout)",
+        "도가니 가열 불균형\n(Crucible Drift)",
+        "진공 배기계 누설\n(Vacuum Leak)"
+    ]
     
-    # Magnifying glass circle
-    circle = plt.Circle((cx, cy), 1.2, color=colors['accent'], fill=False, lw=2.5, zorder=5)
-    ax.add_patch(circle)
+    # Matching alignment scores
+    scores = [15, 25, 92]
+    current_scores = [s * (i/frames) for s in scores]
     
-    # Highlight segment inside magnifying glass
-    mask = (x >= cx - 1.2) & (x <= cx + 1.2)
-    ax.plot(x[mask], y[mask], c=colors['accent'], lw=3.0, zorder=4)
+    # Distinct premium colors
+    bar_colors = [colors['accent'], colors['warning'], colors['danger']]
     
-    ax.set_ylim(0.2, 2.2)
-    ax.set_xlabel("과거 정비 데이터 타임라인", fontsize=8, color='#475569')
-    ax.set_ylabel("패턴 매칭도", fontsize=8, color='#475569')
-    ax.tick_params(axis='both', which='major', labelsize=7.5)
-    ax.grid(True, linestyle=':', alpha=0.5)
+    bars_plot = ax.barh(hypotheses, current_scores, color=bar_colors, height=0.48, zorder=3)
+    
+    ax.set_xlabel("현장 이력 패턴 적합도 (%)", fontsize=8, color='#475569')
+    ax.set_xlim(0, 105)
+    ax.tick_params(axis='both', which='major', labelsize=8)
+    ax.grid(True, axis='x', linestyle=':', alpha=0.5)
+    
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_color('#94a3b8')
     ax.spines['left'].set_color('#94a3b8')
-    ax.legend(loc='lower left', fontsize=7.5, framealpha=0.9)
+    
+    # Render value labels dynamically
+    if i > frames // 2:
+        for bar, score in zip(bars_plot, current_scores):
+            w = bar.get_width()
+            if score > 80:
+                ax.text(w + 2, bar.get_y() + bar.get_height()/2, f"{score:.0f}% [정비 필요]", 
+                        va='center', ha='left', fontsize=8, color=colors['danger'], fontweight='bold')
+            else:
+                ax.text(w + 2, bar.get_y() + bar.get_height()/2, f"{score:.0f}% [정상]", 
+                        va='center', ha='left', fontsize=8, color='#64748b', fontweight='bold')
 
 # Step 7: Report sharing (sending arrow/nodes)
 def step7(ax, i, frames):
