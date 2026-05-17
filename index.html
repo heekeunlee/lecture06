@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lecture 06 · OLED 증착 설비 이상 징후 감지 및 실시간 모니터링</title>
+    <title>Lecture 06 · OLED (Organic Light Emitting Diode - 유기 발광 다이오드) 증착 설비 이상 징후 감지 및 실시간 모니터링</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -933,22 +933,22 @@
         </div>
 
         <div class="hero-section">
-          <h1>Ch.6OLED 증착 설비 이상 징후 감지 및 실시간 모니터링</h1>
+          <h1>Ch.6 OLED (Organic Light Emitting Diode - 유기 발광 다이오드) 증착 설비 이상 징후 감지 및 실시간 모니터링</h1>
           <p class="subtitle">
-            OLED 유기물 증착 챔버의 온도·진공도·증착률 로그를 따라가며 이상 징후를 AI가 자동 감지하고 대시보드로 리포트하게 만듭니다.
+            OLED (Organic Light Emitting Diode - 유기 발광 다이오드) 유기물 증착 챔버의 온도·진공도·증착률 로그를 따라가며 이상 징후를 AI가 자동 감지하고 대시보드로 리포트하게 만듭니다.
           </p>
           <div class="lesson-meta">
             <span>40분</span>
             <span>제조 AI 실습</span>
             <span>실습 포함</span>
-            <span>결과물: OLED 증착 설비 이상 감지 대시보드</span>
+            <span>결과물: OLED (Organic Light Emitting Diode) 증착 설비 이상 감지 대시보드</span>
           </div>
         </div>
       </header>
 
       <section class="overview-section reveal">
         <span class="section-label"><span class="num">01.</span> 오프닝 및 학습목표</span>
-        <h2>오늘 여러분은 OLED 유기물 증착 설비의 센서 로그를 AI 작업지시서로 정리해 <mark>이상 징후 대시보드</mark>로 바꾸는 흐름을 배웁니다.</h2>
+        <h2>오늘 여러분은 OLED (Organic Light Emitting Diode - 유기 발광 다이오드) 유기물 증착 설비의 센서 로그를 AI 작업지시서로 정리해 <mark>이상 징후 대시보드</mark>로 바꾸는 흐름을 배웁니다.</h2>
         <p class="section-intro">
           하나의 증착 챔버를 기준으로 공정이 어떻게 모니터링되는지, 이상치가 발생하면 센서 로그에 어떻게 나타나는지,
           그 신호를 AI가 자동 감지하고 엔지니어용 대시보드로 보고하게 하려면 무엇을 지시해야 하는지 순서대로 다룹니다.
@@ -960,7 +960,7 @@
         <div class="grid-3">
           <article class="card">
             <h3>학습목표 1</h3>
-            <p>OLED 유기물 증착 챔버가 어떤 센서로 모니터링되는지 이해하고, 시간축 기준 데이터 구조를 설명합니다.</p>
+            <p>OLED (Organic Light Emitting Diode - 유기 발광 다이오드) 유기물 증착 챔버가 어떤 센서로 모니터링되는지 이해하고, 시간축 기준 데이터 구조를 설명합니다.</p>
           </article>
           <article class="card">
             <h3>학습목표 2</h3>
@@ -975,20 +975,20 @@
 
       <section class="definition-section reveal">
         <span class="section-label"><span class="num">02.</span> 공정과 설비 설정</span>
-        <h2>오늘의 주인공은 <mark>OLED 유기물 증착 챔버</mark>입니다.</h2>
+        <h2>오늘의 주인공은 <mark>OLED (Organic Light Emitting Diode - 유기 발광 다이오드) 유기물 증착 챔버</mark>입니다.</h2>
         <p class="section-intro">
-          OLED 발광층을 만들 때 유기 재료를 진공 챔버 안에서 가열해 기화시키고, 기판 위에 얇게 증착합니다.
-          이때 소스 온도, 챔버 압력, QCM 증착률, 냉각수 유량이 흔들리면 막 두께와 휘도 균일도가 같이 흔들릴 수 있습니다.
+          OLED (Organic Light Emitting Diode) 발광층을 만들 때 유기 재료를 진공 챔버 안에서 가열해 기화시키고, 기판 위에 얇게 증착합니다.
+          이때 소스 온도, 챔버 압력, QCM (Quartz Crystal Microbalance - 수정진동자 마이크로저울) 증착률, 냉각수 유량이 흔들리면 막 두께와 휘도 균일도가 같이 흔들릴 수 있습니다.
         </p>
         <div style="margin: 2.5rem 0; display: flex; gap: 2rem; justify-content: center; align-items: stretch; flex-wrap: wrap;">
           <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; border: 1px solid var(--border); border-radius: 24px; padding: 1.2rem; background: var(--bg-secondary); box-shadow: var(--shadow);">
             <img src="oled_chamber.png" alt="OLED 증착 설비 (VTE 챔버) 실제 사진" style="width: 100%; height: auto; object-fit: cover; border-radius: 16px;">
-            <p style="color: var(--text-primary); font-size: 0.95rem; font-weight: 700; margin-top: 1rem; text-align: center;">OLED 발광층 유기물 증착 설비 (VTE)</p>
+            <p style="color: var(--text-primary); font-size: 0.95rem; font-weight: 700; margin-top: 1rem; text-align: center;">OLED 발광층 유기물 증착 설비 (VTE - Vacuum Thermal Evaporation - 진공 열 증착)</p>
             <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.2rem; text-align: center; word-break: keep-all;">유기 재료를 가열·기화하여 기판에 증착하는 메인 진공 챔버</p>
           </div>
           <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; border: 1px solid var(--border); border-radius: 24px; padding: 1.2rem; background: var(--bg-secondary); box-shadow: var(--shadow);">
             <img src="oled_substrate.png" alt="증착된 OLED 디스플레이 기판 샘플" style="width: 100%; height: auto; object-fit: cover; border-radius: 16px;">
-            <p style="color: var(--text-primary); font-size: 0.95rem; font-weight: 700; margin-top: 1rem; text-align: center;">증착이 완료된 OLED 기판 샘플</p>
+            <p style="color: var(--text-primary); font-size: 0.95rem; font-weight: 700; margin-top: 1rem; text-align: center;">증착이 완료된 OLED (Organic Light Emitting Diode) 기판 샘플</p>
             <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.2rem; text-align: center; word-break: keep-all;">R, G, B 유기물 서브픽셀 패턴이 정밀하게 형성된 유리 기판</p>
           </div>
         </div>
@@ -998,20 +998,20 @@
             <div class="step-flow-header">
               <span class="step-flow-badge">Step 1</span>
               <h3>공정 선택 (Process Selection)</h3>
-              <span class="step-flow-tag">Display · OLED</span>
+              <span class="step-flow-tag">Display · OLED (Organic Light Emitting Diode)</span>
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc">OLED 발광층 유기물 증착 공정 중 VTE-03 챔버를 분석 대상으로 정합니다.</p>
+                <p class="step-desc">OLED 발광층 유기물 증착 공정 중 VTE (Vacuum Thermal Evaporation - 진공 열 증착) - 03 챔버를 분석 대상으로 정합니다.</p>
                 
                 <!-- VTE-03 Detailed Explanation & Diagram (No details toggle, fully visible) -->
                 <div class="step-detail-box">
-                  <h4 style="color: var(--accent); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">💡 VTE-03 (Vacuum Thermal Evaporation - 진공 열 증착기 3호기)</h4>
-                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">OLED 디스플레이의 발광층 유기재료를 고진공 챔버 안에서 가열해 기화시켜 기판 위에 얇게 입히는 핵심 설비입니다.</p>
+                  <h4 style="color: var(--accent); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">💡 VTE (Vacuum Thermal Evaporation - 진공 열 증착) - 03 (진공 열 증착기 3호기)</h4>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">OLED (Organic Light Emitting Diode) 디스플레이의 발광층 유기재료를 고진공 챔버 안에서 가열해 기화시켜 기판 위에 얇게 입히는 핵심 설비입니다.</p>
                   <ul style="margin: 0.6rem 0; padding-left: 1.1rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.4rem;">
                     <li><strong>Vacuum (진공):</strong> 불순물이 없고 막이 균일하게 덮이도록 우주와 같은 무공기 진공상태를 유지합니다.</li>
                     <li><strong>Thermal (열):</strong> 유기물 소스 용기를 300°C 이상 뜨겁게 가열하여 기화시킵니다.</li>
-                    <li><strong>Evaporation (증착):</strong> 기화된 유기 분자가 유리 기판에 달라붙어 빛나는 화소(Pixel)를 형성합니다.</li>
+                    <li><strong>Evaporation (증착):</strong> 기화된 유기 분자가 유리 기판에 달라붙어 빛나는 화소(Pixel - 화소)를 형성합니다.</li>
                   </ul>
                   <div style="text-align: center; margin-top: 1.2rem;">
                     <img src="vte_diagram.png" alt="VTE 작동 원리 상세 계통도" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
@@ -1031,19 +1031,19 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc">MES/SCADA에서 챔버 압력, 소스 온도, QCM 증착률, 냉각수 유량을 1분 단위로 수집합니다.</p>
+                <p class="step-desc">MES (Manufacturing Execution System - 제조 실행 시스템) / SCADA (Supervisory Control and Data Acquisition - 감시 제어 및 데이터 취득)에서 챔버 압력, 소스 온도, QCM (Quartz Crystal Microbalance - 수정진동자 마이크로저울) 증착률, 냉각수 유량을 1분 단위로 수집합니다.</p>
                 
                 <!-- MES/SCADA Detailed Explanation & Diagram (No details toggle, fully visible) -->
                 <div class="step-detail-box" style="border-left-color: var(--accent-2);">
                   <h4 style="color: var(--accent-2); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">🔑 핵심 용어 사전</h4>
                   <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 0.4rem; color: var(--text-secondary); margin-bottom: 1rem;">
-                    <li><strong>• SCADA (설비 모니터링):</strong> 공장 설비 센서들의 데이터를 종합해 제어하는 감시 시스템</li>
-                    <li><strong>• MES (제조 관리 시스템):</strong> 공장 생산 스케줄 및 전체 조작 이력을 추적하는 최상위 소프트웨어</li>
-                    <li><strong>• QCM 증착률:</strong> 정밀 진동 센서(Quartz)로 나노그램(ng) 단위 유기물이 얼마나 빠르게 증착되는지 재는 속도</li>
+                    <li><strong>• SCADA (Supervisory Control and Data Acquisition - 감시 제어 및 데이터 취득):</strong> 공장 설비 센서들의 데이터를 종합해 제어하는 감시 시스템</li>
+                    <li><strong>• MES (Manufacturing Execution System - 제조 실행 시스템):</strong> 공장 생산 스케줄 및 전체 조작 이력을 추적하는 최상위 소프트웨어</li>
+                    <li><strong>• QCM (Quartz Crystal Microbalance - 수정진동자 마이크로저울) 증착률:</strong> 정밀 진동 센서(Quartz)로 나노그램(ng) 단위 유기물이 얼마나 빠르게 증착되는지 재는 속도</li>
                     <li><strong>• 냉각수 유량:</strong> 초고온 도가니 주변을 시원하게 식혀 열 변형을 막아주는 물의 흐름 속도</li>
                   </ul>
                   <h4 style="color: var(--accent); margin-top: 1rem; margin-bottom: 0.4rem; font-weight: 800; font-size: 1rem;">⚡ 1분 간격 데이터는 어떻게 수집되나요?</h4>
-                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">현장의 다양한 물리 센서들이 시그널(전압, 진동 등)을 발생시키면 PLC/GateWay 장치를 거쳐 <strong>SCADA와 MES 시스템</strong>으로 흘러 들어갑니다. 이 시스템은 1분 간격으로 고정된 시각(예: 12시 00분, 01분, 02분...)에 모든 센서값을 취합하여 <strong>시계열 데이터베이스(Time-Series Database)</strong>에 안정적으로 저장(Historian DB)하게 됩니다.</p>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">현장의 다양한 물리 센서들이 시그널(전압, 진동 등)을 발생시키면 PLC (Programmable Logic Controller - 프로그래머블 로직 컨트롤러) / Gateway (게이트웨이) 장치를 거쳐 <strong>SCADA (Supervisory Control and Data Acquisition)와 MES (Manufacturing Execution System) 시스템</strong>으로 흘러 들어갑니다. 이 시스템은 1분 간격으로 고정된 시각(예: 12시 00분, 01분, 02분...)에 모든 센서값을 취합하여 <strong>시계열 데이터베이스 (Time-Series Database)</strong>에 안정적으로 저장(Historian DB)하게 됩니다.</p>
                   <div style="text-align: center; margin-top: 1.2rem;">
                     <img src="data_collection_flow.png" alt="SCADA/MES 1분 데이터 수집 흐름도" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
                     <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[생산 설비 센서에서 시계열 DB로 이어지는 데이터 수집 흐름도]</p>
@@ -1062,7 +1062,61 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc" style="margin-bottom: 0;">소스 온도가 조금씩 상승하고, 챔버 압력이 UCL 근처로 접근하며, QCM 증착률 변동폭이 커집니다. 비정상적인 열 축적이나 진공 누설의 초기 신호일 수 있습니다.</p>
+                <p class="step-desc">소스 온도가 조금씩 상승하고, 챔버 압력이 UCL (Upper Control Limit - 관리 상한선) 근처로 접근하며, QCM (Quartz Crystal Microbalance - 수정진동자 마이크로저울) 증착률 변동폭이 커집니다. 비정상적인 열 축적이나 진공 누설의 초기 신호일 수 있습니다.</p>
+                
+                <div class="step-detail-box" style="border-left-color: var(--warning);">
+                  <h4 style="color: var(--warning); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">⚠️ 이상 징후의 주요 전조 패턴 (Anomaly Early Signs)</h4>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">OLED 발광층 증착 공정 중, 개별 센서의 급격한 알람보다 다중 센서가 서로 얽히며 정상 범위를 서서히 벗어나는 '미세 드리프트(Drift)'로 이상이 나타납니다.</p>
+                  
+                  <div style="margin: 1rem 0; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left; background: #ffffff; border: 1px solid var(--border); border-radius: 8px;">
+                      <thead>
+                        <tr style="background: #f8f9fa; border-bottom: 2px solid var(--border);">
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">시간 (Timestamp)</th>
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">소스 온도 (Source Temp)</th>
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">챔버 압력 (Chamber Press)</th>
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">QCM 증착률 (QCM Rate)</th>
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">상태 판정</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-secondary);">13:00 (정상)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--accent);">185.0 °C (Normal)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--accent);">1.02e-6 Torr (Normal)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--accent);">1.20 Å/s (Normal)</td>
+                          <td style="padding: 0.6rem 0.8rem;"><span style="color: var(--accent-2); font-weight: bold;">Normal</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border); background: #fffdf5;">
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-secondary);">13:08 (온도 상승)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--warning); font-weight: bold;">186.9 °C ↗ (Drift)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">1.10e-6 Torr</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">1.21 Å/s</td>
+                          <td style="padding: 0.6rem 0.8rem;"><span style="color: var(--warning); font-weight: bold;">Watch (온도)</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border); background: #fffdf5;">
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-secondary);">13:18 (진공 누설)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--warning);">188.1 °C</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--warning); font-weight: bold;">1.65e-6 Torr ↗ (Watch)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">1.18 Å/s</td>
+                          <td style="padding: 0.6rem 0.8rem;"><span style="color: var(--warning); font-weight: bold;">Watch (복합)</span></td>
+                        </tr>
+                        <tr style="background: #fff5f5;">
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-secondary);">13:22 (증착 변동)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--danger);">189.5 °C</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--danger);">1.85e-6 Torr (UCL 돌파)</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--danger); font-weight: bold;">1.05 Å/s ↘ (OOC)</td>
+                          <td style="padding: 0.6rem 0.8rem;"><span style="color: var(--danger); font-weight: bold;">OOC (위험)</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div style="text-align: center; margin-top: 1.2rem;">
+                    <img src="step3.gif" alt="소스 온도 상승 및 챔버 압력 UCL 접근 애니메이션" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[Step 3: 소스 온도 상승 및 챔버 압력 UCL 접근 실시간 시뮬레이션]</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1076,7 +1130,24 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc" style="margin-bottom: 0;">정상 구간 기준 Center/UCL/LCL, 이동평균, 연속 상승 규칙, 다중 센서 동시 변화 규칙을 적용합니다. 이를 통해 엔지니어가 놓치기 쉬운 미세한 이상 패턴을 자동으로 진단해 냅니다.</p>
+                <p class="step-desc">정상 구간 기준 Center (중앙선) / UCL (Upper Control Limit - 관리 상한선) / LCL (Lower Control Limit - 관리 하한선), 이동평균, 연속 상승 규칙, 다중 센서 동시 변화 규칙을 적용합니다. 이를 통해 엔지니어가 놓치기 쉬운 미세한 이상 패턴을 자동으로 진단해 냅니다.</p>
+                
+                <div class="step-detail-box" style="border-left-color: var(--danger);">
+                  <h4 style="color: var(--danger); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">🤖 AI 자동 판정 규칙 및 다차원 센서 진단 (AI Detection Rules)</h4>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">현장의 엔지니어가 수많은 윈도우 창을 확인하지 않고도, 통계적 공정 제어(SPC - Statistical Process Control) 규칙을 AI가 실시간으로 비교하여 이상을 자동 추적합니다.</p>
+                  
+                  <ul style="margin: 0.6rem 0; padding-left: 1.1rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.94rem;">
+                    <li><strong>이동평균 (Moving Average) 필터링:</strong> 5-point 이동평균을 센서 원본 데이터에 입혀 순간적인 센서 노이즈(Spark)를 방지하고 변화 추세(Trend)를 선명화합니다.</li>
+                    <li><strong>UCL / LCL 관리 한계선 기준:</strong> 정상 가동 중인 Lot 20개의 통계적 정상 분포 ($\pm 3\sigma$) 범위를 계산하여, 통계적 관리 한계 영역을 사전에 정밀 산출합니다.</li>
+                    <li><strong>Western Electric Rules 판정 적용:</strong> 3회 연속 UCL 관리 상한의 85% 이상 한계선에 접근 시 주의 경보인 <span style="color: var(--warning); font-weight: bold;">Watch</span>를 부여하고, 한계 탈출 시 즉시 <span style="color: var(--danger); font-weight: bold;">OOC</span>로 긴급 판정합니다.</li>
+                    <li><strong>다중 센서 복합 전조 매칭:</strong> "소스 가열 온도 상승 ➡ 챔버 진공 파손 ➡ QCM 증착 속도 흔들림"으로 이어지는 시간대별 동조 현상을 실시간 상관성으로 매핑합니다.</li>
+                  </ul>
+
+                  <div style="text-align: center; margin-top: 1.2rem;">
+                    <img src="step4.gif" alt="AI 통계 규칙 기반 관리 상한선(UCL) 돌파 감지 알람 애니메이션" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[Step 4: AI 통계 규칙 기반 관리 상한선(UCL) 돌파 및 경고 시스템]</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1084,13 +1155,45 @@
           <!-- Step 5 Card -->
           <div class="step-flow-card">
             <div class="step-flow-header">
-              <span class="step-flow-badge">Step 5</span>
+              <span class="step-flow-badge" style="background: #f0f7ff; color: var(--accent);">Step 5</span>
               <h3>대시보드 리포트 (Dashboard Reporting)</h3>
               <span class="step-flow-tag">Dashboard</span>
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc" style="margin-bottom: 0;">설비 상태 타일, 관리도, 알림 목록, 전조 패턴 요약, 엔지니어 조치 메모를 한 화면에 구성합니다. 직관적인 UI를 제공하여 현장 대응 속도를 획기적으로 개선합니다.</p>
+                <p class="step-desc">설비 상태 타일, 관리도, 알림 목록, 전조 패턴 요약, 엔지니어 조치 메모를 한 화면에 구성합니다. 직관적인 UI (User Interface)를 제공하여 현장 대응 속도를 획기적으로 개선합니다.</p>
+                
+                <div class="step-detail-box" style="border-left-color: var(--accent);">
+                  <h4 style="color: var(--accent); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">📋 실시간 설비 모니터링 대시보드 구성 (Dashboard UI)</h4>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">엔지니어가 대형 복잡 데이터를 일일이 열어보지 않아도 직관적으로 설비 상황을 5초 내 파악할 수 있도록 핵심 지표가 한눈에 들어오는 인터페이스를 시각화합니다.</p>
+                  
+                  <div style="margin: 1rem 0; padding: 1rem; background: #ffffff; border: 1px solid var(--border); border-radius: 16px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);">
+                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 0.6rem; color: var(--text-primary);">대시보드 화면 설계 구조 (UI Wireframe)</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.85rem;">
+                      <div style="background: #f8f9fa; border: 1px dashed #ced4da; padding: 0.8rem; border-radius: 8px;">
+                        <strong style="color: var(--accent);">1. 장비 상태 타일 (EQP Status)</strong>
+                        <p style="margin-top: 0.3rem; color: var(--text-secondary); font-size: 0.8rem;">공장 내 설비 상태 일괄 표시 (VTE-01~04)<br>Normal / Watch / OOC 자동 필터링</p>
+                      </div>
+                      <div style="background: #f8f9fa; border: 1px dashed #ced4da; padding: 0.8rem; border-radius: 8px;">
+                        <strong style="color: var(--danger);">2. 실시간 SPC 관리도 (Control Chart)</strong>
+                        <p style="margin-top: 0.3rem; color: var(--text-secondary); font-size: 0.8rem;">원본 센서값 및 5-point 이동평균 곡선 오버레이<br>UCL / LCL 한계 기준선 실시간 표시</p>
+                      </div>
+                      <div style="background: #f8f9fa; border: 1px dashed #ced4da; padding: 0.8rem; border-radius: 8px;">
+                        <strong style="color: var(--warning);">3. AI 알림 보드 (AI Alert Board)</strong>
+                        <p style="margin-top: 0.3rem; color: var(--text-secondary); font-size: 0.8rem;">이상 징후 인셉션 시간 및 연속 초과 횟수 표시<br>다차원 센서 변화 복합 요약 보고</p>
+                      </div>
+                      <div style="background: #f8f9fa; border: 1px dashed #ced4da; padding: 0.8rem; border-radius: 8px;">
+                        <strong style="color: var(--text-primary);">4. 현장 검증 조치 메모 (SOP Action Guide)</strong>
+                        <p style="margin-top: 0.3rem; color: var(--text-secondary); font-size: 0.8rem;">과거 PM 이력 연동 추천 점검 리스트<br>도가니 보정, 펌프 밸브 교환 주기 안내</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="text-align: center; margin-top: 1.2rem;">
+                    <img src="step5.gif" alt="실시간 설비 모니터링 대시보드 상태 타일 및 알림 애니메이션" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[Step 5: 실시간 설비 모니터링 대시보드 상태 타일 및 알림 애니메이션]</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1104,7 +1207,50 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc" style="margin-bottom: 0;">PM 이력, 재료 교체 시점, 진공 펌프 상태, QCM 센서 보정 이력과 연결해 원인 후보를 좁힙니다. 교차 분석을 바탕으로 불량 발생 전 선제적 조치를 수립합니다.</p>
+                <p class="step-desc">PM (Preventive Maintenance - 예방 보전) 이력, 재료 교체 시점, 진공 펌프 상태, QCM (Quartz Crystal Microbalance) 센서 보정 이력과 연결해 원인 후보를 좁힙니다. 교차 분석을 바탕으로 불량 발생 전 선제적 조치를 수립합니다.</p>
+                
+                <div class="step-detail-box" style="border-left-color: var(--text-primary);">
+                  <h4 style="color: var(--text-primary); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">🔍 다각적 원인 분석 및 교차 현장 검증 (Field Verification)</h4>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">AI가 검지해 낸 이상 징후가 장비 보정 후 자연스러운 물리적 흔들림(예: 도가니 재료 충진)인지, 진공 누설 등으로 인한 심각한 정비 대상인지를 현장 이력 데이터와 결합해 판정합니다.</p>
+                  
+                  <div style="margin: 1rem 0; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left; background: #ffffff; border: 1px solid var(--border); border-radius: 8px;">
+                      <thead>
+                        <tr style="background: #f8f9fa; border-bottom: 2px solid var(--border);">
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">검증 항목</th>
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">핵심 원인 가설</th>
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">현장 물리 이력 연계</th>
+                          <th style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--text-primary);">정비 조치 방향</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                          <td style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--accent);">유기 재료 도가니</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-secondary);">재료 고갈에 따른 잔량 부족으로 온도 불균형 가열 발생</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">최근 재료 교환(Refill) 이후 48시간 운전 데이터</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">보트 가열 히터 온도 프로파일 보정 진행</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                          <td style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--warning);">진공 배기 펌프</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-secondary);">진공 리크(Leak) 발생 또는 밸브 오동작에 따른 압력 불안정</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">진공 펌프 PM(예방 정비) 및 오일 교체 주기 데이터</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">진공 배기 라인 밸브 작동 상태 및 누설 진단 검사</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 0.6rem 0.8rem; font-weight: bold; color: var(--danger);">QCM 센서 오차</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-secondary);">수정진동자 센서 표면 막 두께 과다 누적으로 수명 만료</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">QCM Sensor Life 센서 수명 잔량(%) 및 수명 그래프</td>
+                          <td style="padding: 0.6rem 0.8rem; color: var(--text-primary);">도가니 가동 일시 중지 후 수정진동자 헤드 신규 교체</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div style="text-align: center; margin-top: 1.2rem;">
+                    <img src="step6.gif" alt="현장 데이터와 설비 이력 간 돋보기 교차 검증 애니메이션" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[Step 6: 현장 데이터와 설비 정비 PM 이력 간의 교차 검증 및 돋보기 추적]</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1118,7 +1264,30 @@
             </div>
             <div class="step-flow-body">
               <div class="step-flow-content">
-                <p class="step-desc" style="margin-bottom: 0;">장비 담당자와 공정 엔지니어가 같은 리포트를 보고 조치 우선순위를 정합니다. 데이터에 기반한 빠르고 투명한 커뮤니케이션으로 공장 다운타임을 최소화합니다.</p>
+                <p class="step-desc">장비 담당자와 공정 엔지니어가 같은 리포트를 보고 조치 우선순위를 정합니다. 데이터에 기반한 빠르고 투명한 커뮤니케이션으로 공장 다운타임을 최소화합니다.</p>
+                
+                <div class="step-detail-box" style="border-left-color: var(--accent);">
+                  <h4 style="color: var(--accent); margin-bottom: 0.6rem; font-weight: 800; font-size: 1.05rem;">📢 실시간 리포트 공유 및 신속 협업 체계 (Collaboration & Action)</h4>
+                  <p style="color: var(--text-primary); margin-bottom: 0.8rem;">검지된 이상 징후 분석 결과와 엔지니어 진단 결론은 생산 라인의 실시간 협업 시스템을 통해 자동 공유됩니다. 이를 통해 부서 간 장벽 없는 완벽한 대응 체계를 가동합니다.</p>
+                  
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+                    <div style="border: 1px solid var(--border); padding: 1rem; border-radius: 14px; background: #ffffff;">
+                      <span style="font-size: 0.78rem; font-weight: 900; color: var(--accent-2); border: 1px solid var(--accent-2); padding: 0.15rem 0.45rem; border-radius: 99px; background: #e6fcf5;">실시간 커뮤니케이션</span>
+                      <h5 style="margin-top: 0.6rem; font-size: 0.95rem; font-weight: bold; color: var(--text-primary);">1. AI 자동 메일 및 모바일 Alert</h5>
+                      <p style="margin-top: 0.3rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">설비 보전 엔지니어, 공정 기술팀, 생산 관리팀 담당자에게 동시에 OOC 경보 및 전조 히스토리 모바일 푸시 발송.</p>
+                    </div>
+                    <div style="border: 1px solid var(--border); padding: 1rem; border-radius: 14px; background: #ffffff;">
+                      <span style="font-size: 0.78rem; font-weight: 900; color: var(--accent); border: 1px solid var(--accent); padding: 0.15rem 0.45rem; border-radius: 99px; background: var(--bg-soft);">선제적 조치 실행</span>
+                      <h5 style="margin-top: 0.6rem; font-size: 0.95rem; font-weight: bold; color: var(--text-primary);">2. 선제적 정비 및 AI 피드백 루프</h5>
+                      <p style="margin-top: 0.3rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">품질 불량이 실제 기판에 영향을 주어 수율이 훼손되기 전, 30분 내로 챔버 파트너들과 협력하여 유지 보수 작업을 수행.</p>
+                    </div>
+                  </div>
+
+                  <div style="text-align: center; margin-top: 1.2rem;">
+                    <img src="step7.gif" alt="전 부서 간 이상 감지 리포트 공유 및 협업 피드백 루프 애니메이션" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[Step 7: 전 부서 간 이상 감지 리포트 공유 및 협업 피드백 루프]</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1129,43 +1298,43 @@
         <span class="section-label"><span class="num">03.</span> 현재 모니터링 방식</span>
         <h2>정상 상태에서는 챔버 센서가 <mark>조용한 범위 안에서 움직입니다</mark>.</h2>
         <p class="section-intro">
-          VTE-03 설비는 1분마다 센서를 남기고, 운영자는 화면에서 현재값과 알람만 확인합니다.
-          문제는 작은 드리프트가 알람 전에는 정상 노이즈처럼 보인다는 점입니다.
+          VTE (Vacuum Thermal Evaporation - 진공 열 증착) - 03 설비는 1분마다 센서 로그를 기록하고, 운영자는 화면에서 현재값과 알람 상태만 확인합니다.
+          문제는 미세한 드리프트(Drift)가 알람이 발생하기 전까지는 일반 정상 노이즈처럼 보인다는 점입니다.
         </p>
         <div class="case-panel">
           <div class="case-panel-head">
             <span>Normal Monitoring</span>
-            <strong>VTE-03 · OLED 유기물 증착 챔버 · 1분 센서 로그</strong>
+            <strong>VTE (Vacuum Thermal Evaporation) - 03 · OLED (Organic Light Emitting Diode - 유기 발광 다이오드) 유기물 증착 챔버 · 1분 센서 로그</strong>
           </div>
           <div class="case-body">
             <div class="file-stack">
               <div class="file-card">
                 <strong>VTE03_SOURCE_TEMP.csv</strong>
-                <span>소스 온도 · 183~187°C 정상 범위</span>
+                <span>소스 온도 · 183~187°C 정상 운전 범위</span>
                 <div class="mini-bars">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
                 </div>
               </div>
               <div class="file-card">
                 <strong>VTE03_CHAMBER_PRESS.csv</strong>
-                <span>챔버 압력 · 1.0e-6 Torr 부근</span>
+                <span>챔버 진공 압력 · 1.0e-6 Torr 부근</span>
                 <div class="mini-bars">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
                 </div>
               </div>
               <div class="file-card">
-                <strong>VTE03_QCM_RATE.csv</strong>
-                <span>증착률 · 1.20 Å/s 목표</span>
+                <strong>VTE03_QCM_RATE (Quartz Crystal Microbalance Rate).csv</strong>
+                <span>QCM (Quartz Crystal Microbalance) 증착률 · 1.20 Å/s 제어 목표</span>
                 <div class="mini-bars">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
                 </div>
               </div>
             </div>
             <div class="metrics">
-              <div class="metric"><strong>1분</strong><span>로그 주기</span></div>
-              <div class="metric"><strong>4종</strong><span>핵심 센서</span></div>
-              <div class="metric"><strong>UCL</strong><span>관리 상한</span></div>
-              <div class="metric"><strong>알람 전</strong><span>드리프트 구간</span></div>
+              <div class="metric"><strong>1분</strong><span>로그 수집 주기</span></div>
+              <div class="metric"><strong>4종</strong><span>핵심 측정 센서</span></div>
+              <div class="metric"><strong>UCL (Upper Control Limit)</strong><span>관리 상한선</span></div>
+              <div class="metric"><strong>알람 발생 전</strong><span>미세 드리프트 구간</span></div>
             </div>
           </div>
         </div>
@@ -1177,72 +1346,70 @@
 
       <section class="reveal">
         <span class="section-label"><span class="num">04.</span> 이상 징후가 나타나는 방식</span>
-        <h2>이상은 갑자기 터지기보다 <mark>센서 조합의 작은 변화</mark>로 먼저 나타납니다.</h2>
+        <h2>이상은 갑자기 발생하기보다 <mark>다차원 센서 조합의 미세한 연계 변화</mark>로 시작됩니다.</h2>
         <p class="section-intro">
-          예를 들어 13:05부터 소스 온도가 천천히 올라가고, 13:18에 챔버 압력이 UCL 근처까지 접근하며,
-          13:22에는 QCM 증착률이 목표값에서 흔들리기 시작합니다. 이 흐름이 이어지면 막 두께 편차와 휘도 불균일로 연결될 수 있습니다.
+          예를 들어 13:05부터 소스 온도가 서서히 올라가고(Drift), 13:18에 챔버 압력이 UCL (Upper Control Limit) 근계 영역까지 접근하며(Watch),
+          13:22에는 QCM (Quartz Crystal Microbalance) 증착률이 설정 목표값에서 심하게 흔들려 관리 한계를 이탈하게 됩니다(OOC).
         </p>
         <div class="grid-3">
           <article class="card">
-            <h3>1단계 · 소스 온도 드리프트</h3>
-            <p>순간 알람은 아니지만 5-point 이동평균이 20분 이상 한 방향으로 올라갑니다.</p>
+            <h3>1단계 · 소스 온도 드리프트 (Drift)</h3>
+            <p>개별 데이터는 순간 스펙 이내지만, 5-point 이동평균선이 20분 이상 한 방향으로 지속 상승하는 이상 징후입니다.</p>
           </article>
           <article class="card">
-            <h3>2단계 · 챔버 압력 Watch</h3>
-            <p>진공도가 흔들리며 압력이 관리상한 근처에 머뭅니다. 소스 온도 변화와 같은 시간대인지 봐야 합니다.</p>
+            <h3>2단계 · 챔버 압력 Watch (주의 경보)</h3>
+            <p>챔버 진공 압력이 흔들리며 UCL (Upper Control Limit) 근계(85%선)에 접근합니다. 소스 온도 드리프트 시점과의 동조 여부를 체크합니다.</p>
           </article>
           <article class="card">
-            <h3>3단계 · 증착률 OOC</h3>
-            <p>QCM 증착률이 UCL/LCL 밖으로 벗어나면 OOC로 보고, 해당 lot과 설비 상태를 즉시 연결합니다.</p>
+            <h3>3단계 · QCM 증착률 OOC (관리 이탈 판정)</h3>
+            <p>QCM (Quartz Crystal Microbalance) 증착률이 UCL 또는 LCL (Lower Control Limit) 범위를 이탈(OOC - Out of Control)하여 제품 Lot 불량 가능성이 높아집니다.</p>
           </article>
         </div>
       </section>
 
       <section class="reveal">
         <span class="section-label"><span class="num">05.</span> AI 자동감지 설계</span>
-        <h2>AI에게는 “이상 찾아줘”가 아니라 <mark>공정 맥락, 센서, 판정 규칙</mark>을 같이 줍니다.</h2>
+        <h2>AI에게는 “이상 찾아줘”가 아니라 <mark>공정 맥락, 센서 정보, 구체적 판정 규칙</mark>을 제공해야 합니다.</h2>
         <p class="section-intro">
-          AI는 원인을 단정하는 도구가 아니라, 정해진 기준으로 로그를 정렬하고, Watch/OOC를 표시하고,
-          어떤 센서가 먼저 흔들렸는지 설명하는 도구로 설계해야 합니다.
+          AI는 원인을 최종 단정짓는 솔루션이 아니며, 사전에 정의한 SPC (Statistical Process Control) 기준으로 데이터를 정리하여 Watch / OOC (Out of Control)를 정확하게 경고하고 설명하는 도구입니다.
         </p>
         <div class="prompt-box">
-          OLED 유기물 증착 설비 VTE-03의 1분 센서 로그를 분석해줘.
-          컬럼은 <mark>timestamp, chamber_pressure, source_temperature, qcm_rate, cooling_water_flow, lot_id</mark>야.
-          각 센서를 같은 시간축으로 정렬하고 <mark>5-point 이동평균</mark>을 계산해줘.
-          최근 정상 lot 20개를 기준으로 <mark>Center, UCL, LCL</mark>을 계산하고,
-          UCL/LCL을 벗어나면 OOC, UCL의 85% 이상에 3회 연속 접근하면 Watch로 표시해줘.
-          특히 <mark>소스 온도 상승 → 챔버 압력 상승 → QCM 증착률 흔들림</mark> 순서가 보이면 전조 패턴으로 요약해줘.
-          결과는 엔지니어가 바로 볼 수 있는 대시보드와 일일 리포트 형식으로 만들어줘.
+          OLED (Organic Light Emitting Diode) 유기물 증착 설비 VTE (Vacuum Thermal Evaporation) - 03의 1분 주기 센서 로그를 분석해줘.
+          컬럼은 <mark>timestamp, chamber_pressure, source_temperature, qcm_rate (Quartz Crystal Microbalance Rate), cooling_water_flow, lot_id</mark>야.
+          각 센서 데이터를 동일한 시간축으로 완벽하게 정렬하고 <mark>5-point 이동평균</mark>을 적용하여 노이즈를 필터링해줘.
+          가장 안정적이었던 최근 정상 Lot 20개를 기준으로 통계적 대표값인 <mark>Center (중앙선), UCL (Upper Control Limit - 관리 상한선), LCL (Lower Control Limit - 관리 하한선)</mark>을 정밀 계산해줘.
+          UCL/LCL 범위를 1회라도 이탈하면 OOC (Out of Control), UCL의 85%선에 3회 연속 접근 시 Watch (주의) 상태로 표시해줘.
+          특히 <mark>소스 온도 점진 상승 ➡ 챔버 압력 상승 ➡ QCM 증착률 요동</mark> 순의 다차원 전조 흐름이 검출되면 주요 골자를 전조 패턴 요약으로 리포팅해줘.
+          결과는 현장 엔지니어가 신속 진단할 수 있게 대시보드 화면 및 일일 보고서 템플릿으로 출력해줘.
           <div class="rule-grid">
-            <div><strong>데이터</strong><span>VTE-03, lot, 센서 로그</span></div>
-            <div><strong>계산</strong><span>이동평균, Center, UCL/LCL</span></div>
-            <div><strong>판정</strong><span>Normal, Watch, OOC</span></div>
-            <div><strong>리포트</strong><span>대시보드, 알림, 조치 메모</span></div>
+            <div><strong>데이터 소스</strong><span>VTE-03, Lot 정보, 1분 폴링 로그</span></div>
+            <div><strong>통계적 계산</strong><span>5-point 이동평균, UCL / LCL 산출</span></div>
+            <div><strong>이상 판정</strong><span>Normal, Watch (주의), OOC (이탈)</span></div>
+            <div><strong>협업 리포트</strong><span>대시보드 UI, 우선 알림, PM 가이드 메모</span></div>
           </div>
         </div>
       </section>
 
       <section class="reveal">
         <span class="section-label"><span class="num">06.</span> 대시보드 리포트</span>
-        <h2>After: AI 산출물은 <mark>OLED 증착 담당자가 바로 판단할 화면</mark>이어야 합니다.</h2>
+        <h2>After: AI가 정밀 생성한 산출물은 <mark>OLED (Organic Light Emitting Diode) 증착 엔지니어가 즉각 조치할 수 있는 판단 화면</mark>이어야 합니다.</h2>
         <p class="section-intro">
-          대시보드는 예쁜 차트가 아니라 업무 화면입니다. 어떤 설비가 위험한지, 어느 lot에서 시작됐는지,
-          어떤 센서가 먼저 흔들렸는지, 담당자가 무엇을 확인해야 하는지가 한 번에 보여야 합니다.
+          대시보드는 비주얼뿐만 아니라 실질적인 제조 모니터링 허브가 되어야 합니다. 이상 발생 설비, 해당 Lot ID, 다차원 전조 흐름, SOP 조치 연계 프로세스가 원스톱으로 표출되어야 합니다.
         </p>
         <div class="case-panel">
           <div class="case-panel-head">
-            <span>After</span>
-            <strong>VTE-03 관리도 + 설비 상태 타일 + AI 알림 카드 + 조치 메모</strong>
+            <span>After (AI Dashboard)</span>
+            <strong>VTE (Vacuum Thermal Evaporation) - 03 실시간 관리도 + 상태 타일 + 경고 알림판 + SOP 가이드 메모</strong>
           </div>
           <div class="case-body">
             <div class="dashboard">
               <div class="monitor-card">
                 <div class="monitor-top">
                   <div>
-                    <span>Control Chart</span>
-                    <h3>VTE-03 QCM Rate / Moving Average</h3>
+                    <span>실시간 통계 관리도 (Control Chart)</span>
+                    <h3>VTE-03 QCM (Quartz Crystal Microbalance) Rate / 5-Point Moving Average</h3>
                   </div>
-                  <div class="status-chip">OOC</div>
+                  <div class="status-chip" style="background: #fee2e2; color: #b91c1c; font-weight: bold; border: 1px solid #fecaca;">OOC (이탈)</div>
                 </div>
                 <svg viewBox="0 0 640 300" role="img" aria-label="대시보드 관리도">
                   <line x1="50" y1="70" x2="600" y2="70" class="ucl-line" />
@@ -1253,30 +1420,30 @@
                   <circle cx="460" cy="82" r="8" class="watch-dot" />
                   <circle cx="510" cy="62" r="10" class="alert-dot" />
                   <circle cx="560" cy="76" r="10" class="alert-dot" />
-                  <text x="55" y="58" class="chart-alert">UCL</text>
-                  <text x="500" y="42" class="chart-alert">13:22 OOC</text>
+                  <text x="55" y="58" class="chart-alert">UCL (관리상한선)</text>
+                  <text x="500" y="42" class="chart-alert">13:22 OOC 감지!</text>
                 </svg>
               </div>
               <div class="alert-list">
-                <div class="alert-card">
-                  <strong>13:22 · QCM Rate OOC</strong>
-                  <p>증착률 이동평균이 LCL 아래로 벗어났습니다. 25분 전부터 소스 온도 상승과 챔버 압력 Watch가 함께 관찰됩니다.</p>
+                <div class="alert-card" style="border-left: 5px solid var(--danger);">
+                  <strong>13:22 · QCM Rate OOC (Out of Control - 관리 이탈)</strong>
+                  <p>QCM (Quartz Crystal Microbalance) 증착률 이동평균이 LCL (Lower Control Limit) 하한선을 하회 이탈했습니다. 약 25분 전부터 시작된 소스 온도의 드리프트와 진공 압력의 Watch(주의) 전조 패턴이 함께 탐지되었습니다.</p>
                 </div>
-                <div class="alert-card">
-                  <strong>13:18 · Chamber Pressure Watch</strong>
-                  <p>챔버 압력이 UCL의 85% 이상에 3회 연속 접근했습니다. 진공 펌프와 배기 밸브 상태를 확인하세요.</p>
+                <div class="alert-card" style="border-left: 5px solid var(--warning); background: #fffdf5; border-color: var(--warning);">
+                  <strong>13:18 · Chamber Pressure Watch (주의 경보)</strong>
+                  <p>챔버 진공도가 요동치며 압력 관리상한인 UCL (Upper Control Limit)의 85% 한계선에 3회 연속 도달했습니다. 진공 펌프 배기 상태 및 실링 부위를 체크하세요.</p>
                 </div>
-                <div class="alert-card">
-                  <strong>조치 메모</strong>
-                  <p>유기 재료 교체 시점, QCM 센서 보정, 챔버 클리닝 이력, 냉각수 유량을 우선 확인합니다.</p>
+                <div class="alert-card" style="border-left: 5px solid var(--text-primary); background: #f8f9fa; border-color: var(--text-primary);">
+                  <strong>SOP 현장 조치 가이드 (Standard Operating Procedure)</strong>
+                  <p>유기 재료 보트 충진 PM 이력 검토, QCM (수정진동자) 센서 주파수 보정, 챔버 배기 밸브 라인 및 열 교환 냉각수 유량을 즉시 진단하십시오.</p>
                 </div>
               </div>
             </div>
             <div class="status-grid">
-              <div class="status-tile normal"><strong>VTE-01</strong><span>Normal · 안정</span></div>
-              <div class="status-tile watch"><strong>VTE-02</strong><span>Watch · 압력 상승</span></div>
-              <div class="status-tile ooc"><strong>VTE-03</strong><span>OOC · 즉시 확인</span></div>
-              <div class="status-tile normal"><strong>VTE-04</strong><span>Normal · 안정</span></div>
+              <div class="status-tile normal"><strong>VTE-01</strong><span>Normal · 운전 안정</span></div>
+              <div class="status-tile watch"><strong>VTE-02</strong><span>Watch · 진공 압력 상승</span></div>
+              <div class="status-tile ooc"><strong>VTE-03</strong><span>OOC (이탈) · 현장 긴급 PM</span></div>
+              <div class="status-tile normal"><strong>VTE-04</strong><span>Normal · 운전 안정</span></div>
             </div>
           </div>
         </div>
@@ -1284,92 +1451,90 @@
 
       <section class="teaching-section reveal">
         <span class="section-label"><span class="num">07.</span> 전조 패턴 해석</span>
-        <h2>OOC가 찍힌 순간보다 <mark>그 전 30분의 공정 흐름</mark>을 먼저 봐야 합니다.</h2>
+        <h2>OOC (Out of Control - 관리 이탈)가 기록된 시점보다 <mark>그 발생 30분 전의 시계열 공정 연계 흐름</mark>을 입체적으로 관측해야 합니다.</h2>
         <div class="script-map">
           <div class="script-scene">
             <div class="scene-time">1</div>
-            <strong>소스 온도 시작점</strong>
-            <p>소스 온도 이동평균이 언제부터 한 방향으로 올라갔는지 확인합니다.</p>
-            <span>패턴: 온도 드리프트</span>
+            <strong>소스 온도 시작점 (Temperature Drift)</strong>
+            <p>소스 히팅 도가니 온도 5-point 이동평균선이 안정 상태에서 이탈해 위로 서서히 솟구치기 시작한 타이밍을 추적합니다.</p>
+            <span>패턴: 온도 드리프트 (Drift)</span>
           </div>
           <div class="script-scene">
             <div class="scene-time">2</div>
-            <strong>챔버 압력 동조</strong>
-            <p>온도 상승 뒤 챔버 압력이 같은 시간대에 UCL 근처로 접근했는지 비교합니다.</p>
-            <span>패턴: 압력 Watch</span>
+            <strong>챔버 진공 압력 동조 (Chamber Pressure Watch)</strong>
+            <p>온도 점진 상승 직후, 챔버의 고진공도가 미세하게 누설되며 관리 한계선인 UCL (Upper Control Limit) 85% 한계 영역에 다다랐는지 크로스 오버 분석을 진행합니다.</p>
+            <span>패턴: 압력 Watch (주의 경보)</span>
           </div>
           <div class="script-scene">
             <div class="scene-time">3</div>
-            <strong>증착률 영향</strong>
-            <p>QCM 증착률이 흔들린 시점과 압력 변화가 연결되는지 확인합니다.</p>
-            <span>패턴: Rate OOC</span>
+            <strong>QCM 증착률 타격 (QCM Rate OOC)</strong>
+            <p>진공 저하와 도가니 가열 온도 상승이 QCM (Quartz Crystal Microbalance) 증착 속도 흔들림과 완벽히 동조되어 관리 영역을 벗어나는 타격 시점을 필터링합니다.</p>
+            <span>패턴: Rate OOC (관리 이탈 판정)</span>
           </div>
           <div class="script-scene">
             <div class="scene-time">4</div>
-            <strong>현장 이력 연결</strong>
-            <p>유기 재료 교체, 챔버 클리닝, QCM 보정, 진공 펌프 PM 이력을 같은 시간대에 놓고 후보를 좁힙니다.</p>
-            <span>패턴: 이벤트 매칭</span>
+            <strong>현장 정비 이력 연계 (PM History Matching)</strong>
+            <p>유기 재료 보트 교환, 챔버 파트 클리닝, 수정진동자 헤드 보정, 진공 펌프 PM (Preventive Maintenance - 예방 보전) 정비 타임스탬프와 매칭해 유발 원인 후보를 단시간 내 정립합니다.</p>
+            <span>패턴: 현장 이벤트 매핑</span>
           </div>
           <div class="script-scene">
             <div class="scene-time">5</div>
-            <strong>조치 메모 작성</strong>
-            <p>AI 결과는 원인 단정이 아니라, 담당자가 먼저 확인할 챔버·lot·센서·시간대를 정리하는 용도로 씁니다.</p>
-            <span>패턴: 우선순위</span>
+            <strong>SOP 조치 메모 확정 (Action SOP Formulation)</strong>
+            <p>AI 진단 요약을 기반으로 공정 조치 매뉴얼 표준작업절차(SOP)를 구동하여 장비 조치 우선순위를 최종 수립하고 장비 수명 다운타임을 최소화합니다.</p>
+            <span>패턴: 정비 우선순위 확정</span>
           </div>
         </div>
       </section>
 
       <section class="teaching-section reveal">
         <span class="section-label"><span class="num">08.</span> 엔지니어 검증</span>
-        <h2>AI 결과는 최종 판단이 아니라 <mark>OLED 증착 담당자가 검증할 후보 목록</mark>입니다.</h2>
+        <h2>AI의 진단 결과는 원인 규명이 아닌 <mark>OLED (Organic Light Emitting Diode) 증착 기술진이 최종 교차 검증해야 하는 원인 후보지</mark>입니다.</h2>
         <p class="section-intro">
-          AI가 VTE-03을 OOC로 표시했더라도, 현장 엔지니어는 반드시 설비 이력과 품질 결과를 연결해 확인해야 합니다.
+          AI가 VTE (Vacuum Thermal Evaporation) - 03 장비를 OOC (Out of Control)로 경고 판정하더라도, 실무자는 장비 작동 및 계측기 이상, 제품 품질 데이터를 정합 연계해 최종 결단을 내립니다.
         </p>
         <div class="checklist">
-          <div class="check-item"><i>1</i><div><strong>센서 결측과 시간축 정렬</strong><span>챔버 압력, 소스 온도, QCM 증착률의 timestamp가 같은 lot 기준으로 정렬됐는지 확인합니다.</span></div></div>
-          <div class="check-item"><i>2</i><div><strong>유기 재료 교체 이력</strong><span>재료 보트 교체 직후의 온도 안정화 과정이 이상으로 잘못 잡힌 것은 아닌지 확인합니다.</span></div></div>
-          <div class="check-item"><i>3</i><div><strong>챔버 클리닝과 진공 펌프 PM</strong><span>최근 클리닝, 배기 밸브, 펌프 정비 이력이 압력 Watch와 연결되는지 봅니다.</span></div></div>
-          <div class="check-item"><i>4</i><div><strong>QCM 센서 보정</strong><span>실제 증착률 이상인지, QCM 센서 보정이나 수명 이슈인지 분리합니다.</span></div></div>
-          <div class="check-item"><i>5</i><div><strong>막 두께·휘도 결과 연결</strong><span>OOC lot이 실제 두께 편차, 휘도 얼룩, 수율 저하와 연결되는지 후속 데이터를 확인합니다.</span></div></div>
+          <div class="check-item"><i>1</i><div><strong>센서 데이터 누락 및 타임스탬프 정렬 상태</strong><span>챔버 압력, 도가니 소스 가열 온도, QCM (Quartz Crystal Microbalance) 증착률 센서들의 수집 Timestamp가 동일 Lot ID 기준으로 정확히 동기화되었는지 검증합니다.</span></div></div>
+          <div class="check-item"><i>2</i><div><strong>도가니 내 유기 재료 보트 충진 이력</strong><span>유기 재료 교체 직후 진행되는 오븐 안정화 및 에이징 가열 공정이 일시적 OOC 감지 오류로 오진된 상태가 아닌지 확인합니다.</span></div></div>
+          <div class="check-item"><i>3</i><div><strong>챔버 클리닝 작업 및 진공 배기 펌프 PM 내역</strong><span>최근 진행한 챔버 내부 가열 클리닝 작업, 배기 포트 밸브 동작 상태, 진공 펌프 PM (Preventive Maintenance) 정비 히스토리가 압력 Watch 경보와 기하학적으로 연관이 있는지 파악합니다.</span></div></div>
+          <div class="check-item"><i>4</i><div><strong>QCM 수정진동자 센서 건전성 및 계측 보정</strong><span>실제 유기막 증착률 이상인지, QCM 센서 수정진동자의 두께 수명 축적 한계로 인한 측정 감도 왜곡인지 구분 검토합니다.</span></div></div>
+          <div class="check-item"><i>5</i><div><strong>기판 분석 결과(막 두께 편차 및 휘도 균일성)</strong><span>OOC로 판정된 해당 가동 Lot의 실제 OLED 기판 표면 박막 두께 분석 데이터, 휘도 얼룩 스캔, 양산 수율과 인과관계를 매핑합니다.</span></div></div>
         </div>
       </section>
 
       <section class="reveal">
         <span class="section-label"><span class="num">09.</span> 실습용 프롬프트</span>
-        <h2>수강생은 이 템플릿으로 <mark>OLED 증착 설비 대시보드</mark>를 만들 수 있습니다.</h2>
+        <h2>수강생이 직접 실습하고 제조 특화 포트폴리오를 만들 수 있는 <mark>OLED (Organic Light Emitting Diode) 증착 설비 실시간 대시보드 생성 프롬프트 템플릿</mark>입니다.</h2>
         <div class="copy-panel">
-          <pre>OLED 유기물 증착 설비 VTE-03의 센서 로그를 분석해줘.
+          <pre>OLED (Organic Light Emitting Diode) 유기물 증착 설비 VTE (Vacuum Thermal Evaporation) - 03의 1분 폴링 센서 로그를 분석해줘.
 
-데이터에는 timestamp, equipment_id, lot_id, source_temperature, chamber_pressure, qcm_rate, cooling_water_flow 컬럼이 있다.
-먼저 lot_id와 timestamp 기준으로 시간축을 정렬하고, 결측치와 단위 이상을 점검해줘.
-각 센서에는 5-point 이동평균을 적용해줘.
-최근 정상 lot 20개를 기준으로 Center, UCL, LCL을 계산해줘.
-UCL/LCL을 벗어난 시점은 OOC로 표시하고, UCL의 85% 이상에 3회 연속 접근하면 Watch로 표시해줘.
-소스 온도 상승 → 챔버 압력 상승 → QCM 증착률 흔들림 순서가 보이면 전조 패턴으로 요약해줘.
+데이터는 timestamp, equipment_id, lot_id, source_temperature, chamber_pressure, qcm_rate (Quartz Crystal Microbalance Rate), cooling_water_flow 컬럼으로 이루어져 있어.
+1. 먼저 lot_id 및 timestamp 필드 기준으로 시계열 정렬을 수행하고 결측 데이터와 스케일 이상치를 보정해줘.
+2. 미세 노이즈를 필터링하고 거시적 패턴을 보기 위해 각 센서에 5-point 이동평균(Moving Average) 필터를 계산해줘.
+3. 가장 안정적으로 가동되었던 최근 정상 Lot 20개 구간의 통계값을 사용해 Center (중앙값), UCL (Upper Control Limit - 관리 상한선), LCL (Lower Control Limit - 관리 하한선) 관리 경계를 계산해줘.
+4. 센서 5-point 이동평균이 UCL/LCL 영역을 이탈하는 사건은 OOC (Out of Control - 관리 이탈) 상태로 판정하고, UCL의 85% 임계영역에 3회 연속 동시 접근할 때는 주의 경보인 Watch 상태로 정의해줘.
+5. "도가니 소스 가열 온도 이상 드리프트 ➡ 챔버 진공 압력 관리 상한 돌파 ➡ QCM 박막 증착 속도 요동" 순의 다차원 전조 흐름 동조성이 있는지 OOC 발생 전 30분 구간을 역추적해 패턴을 요약해줘.
 
-결과는 다음 화면으로 만들어줘.
-1. VTE 설비별 Normal / Watch / OOC 상태 타일
-2. 소스 온도, 챔버 압력, QCM 증착률 관리도
-3. lot_id별 OOC 발생 시점 목록
-4. OOC 30분 전부터의 전조 패턴 요약
-5. 유기 재료 교체, 챔버 클리닝, QCM 보정, 진공 펌프 PM 확인 메모
-6. 일일 리포트 형태의 요약 문장</pre>
+분석을 마친 뒤, 생산 현장 장비 엔지니어가 시각적으로 5초 내 진단 가능한 다음 구성의 HTML/CSS 기반 실시간 모니터링 대시보드 UI를 코딩해줘.
+1. VTE 장비 라인별(VTE-01~04) Normal / Watch / OOC (관리 이탈) 한눈에 확인하는 설비 상태 타일 세트
+2. 원본 측정 로그(Blue)와 5-point 이동평균선(Black), UCL/LCL(Red)을 실시간 매핑해 표시하는 QCM 증착 속도 관리도 차트
+3. Lot ID별 OOC(관리 이탈) 감지 시각 및 센서 요약 경고 알림판 목록
+4. OOC 사건 발생 이전 30분 시계열 트렌드 요약 리포트
+5. 현장 정비 SOP(Standard Operating Procedure) 연계 점검 리스트 (도가니 잔량, 챔버 씰링, 진공 펌프 PM (Preventive Maintenance), QCM 수정진동자 건전성)
+6. 아침 업무 시 전 부서와 빠르게 팩트를 공유할 수 있는 한 줄짜리 모바일 공유용 일일 이상 징후 일일 리포트</pre>
         </div>
       </section>
 
       <section class="reveal">
         <div class="closing-card">
-          <h2>오늘의 결론: AI는 원인을 단정하지 않습니다. OLED 증착 설비에서 먼저 봐야 할 신호를 정리합니다.</h2>
+          <h2>오늘의 결론: AI는 원인을 단독 판정하지 않습니다. OLED (Organic Light Emitting Diode) 증착 설비에서 가장 먼저 점검해야 할 '최고 우선순위 전조 신호'들을 똑똑하게 정렬해 줄 뿐입니다.</h2>
           <p>
-            06강의 핵심은 추상적인 이상 탐지가 아니라, 하나의 공정과 설비를 잡고 정상 모니터링, 이상 징후,
-            AI 자동 감지, 대시보드 리포트까지 연결하는 것입니다. VTE-03의 소스 온도, 챔버 압력, QCM 증착률을
-            같은 시간축에 놓고 기준을 명확히 주면 AI는 엔지니어가 조치할 수 있는 화면과 리포트를 만들어줍니다.
+            06강의 중추적 주제는 추상적이고 복잡한 기계학습 모델링이 아닌, 실제 공정과 핵심 장비의 1분 폴링 로그 데이터를 시작으로 "정상 상태 수집 ➡ 이상 징후 포착 ➡ AI 기반 SPC (Statistical Process Control) 판정 및 경보 ➡ 현장 대시보드 리포팅"까지의 제조 기술 엔지니어링 표준 대응 루프를 완성하는 것입니다. VTE (Vacuum Thermal Evaporation) - 03 장비의 소스 온도, 챔버 압력, QCM (Quartz Crystal Microbalance) 증착 속도를 일원화된 타임라인에 엮고 정확한 통계 연산 가이드를 전달하면, AI는 여러분의 손발이 되어 현장의 위험 다운타임을 사전 봉쇄하는 가장 정밀한 지휘 통제 화면을 생성해 낼 것입니다.
           </p>
         </div>
       </section>
 
       <footer class="footer">
-        Lecture 06 · OLED Evaporation Equipment Anomaly Detection & Realtime Monitoring
+        Lecture 06 · OLED (Organic Light Emitting Diode) Evaporation Equipment Anomaly Detection & Realtime Monitoring (MES/SCADA/PLC/QCM/PM Integrated Study)
       </footer>
     </main>
 
