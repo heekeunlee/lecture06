@@ -1050,9 +1050,151 @@
                   </ul>
                   <h4 style="color: var(--accent); margin-top: 1rem; margin-bottom: 0.4rem; font-weight: 800; font-size: 1rem;">⚡ 1분 간격 데이터는 어떻게 수집되나요?</h4>
                   <p style="color: var(--text-primary); margin-bottom: 0.8rem;">현장의 다양한 물리 센서들이 시그널(전압, 진동 등)을 발생시키면 PLC (Programmable Logic Controller - 프로그래머블 로직 컨트롤러) / Gateway (게이트웨이) 장치를 거쳐 <strong>SCADA (Supervisory Control and Data Acquisition)와 MES (Manufacturing Execution System) 시스템</strong>으로 흘러 들어갑니다. 이 시스템은 1분 간격으로 고정된 시각(예: 12시 00분, 01분, 02분...)에 모든 센서값을 취합하여 <strong>시계열 데이터베이스 (Time-Series Database)</strong>에 안정적으로 저장(Historian DB)하게 됩니다.</p>
-                  <div style="text-align: center; margin-top: 1.2rem;">
+                  <div style="text-align: center; margin-top: 1.2rem; margin-bottom: 1.5rem;">
                     <img src="data_collection_flow.png" alt="SCADA/MES 1분 데이터 수집 흐름도" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
                     <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.4rem; font-weight: 700;">[생산 설비 센서에서 시계열 DB로 이어지는 데이터 수집 흐름도]</p>
+                  </div>
+
+                  <!-- 3 Visualization Methods Section for 1-minute interval data -->
+                  <div style="margin-top: 2rem; border-top: 1.5px dashed var(--border); padding-top: 1.5rem;">
+                    <h4 style="color: var(--accent-2); margin-bottom: 0.8rem; font-weight: 800; font-size: 1.05rem;">📊 1분 주기 데이터 수집 시 효과적인 3대 시각화 기법</h4>
+                    <p style="color: var(--text-primary); margin-bottom: 1.2rem; font-size: 0.92rem; line-height: 1.5;">
+                      1분 단위로 수집된 다차원 센서 데이터는 단순 나열만으로는 직관적인 가독성이 떨어집니다. 아래의 <strong>3가지 필수 통계/시계열 시각화 방법</strong>을 결합하여 가동 현황 분석 및 이상 인과관계를 가장 손쉽게 시각화할 수 있습니다.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.2rem; margin-top: 1rem;">
+                      
+                      <!-- 1. 다중 시계열 런 차트 Card -->
+                      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem;">
+                          <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #e0f2fe; color: #0284c7; font-weight: 800; font-size: 0.9rem;">1</span>
+                          <h5 style="margin: 0; color: var(--text-primary); font-size: 0.95rem; font-weight: 800;">다중 시계열 런 차트 (Multi-Run Chart)</h5>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.45; margin-bottom: 1rem;">
+                          각 센서별 스케일(Torr, °C, Å/s, LPM)에 맞춰 개별 라인을 시각화해, 실시간 노이즈와 서서히 증가/감소하는 물리적 추세(Drift)를 직관적으로 파악합니다.
+                        </p>
+                        
+                        <!-- Inline SVG Run Chart Mockup -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.6rem 0.5rem; text-align: center;">
+                          <svg viewBox="0 0 300 120" style="width: 100%; height: auto;">
+                            <!-- Grid lines -->
+                            <line x1="20" y1="20" x2="280" y2="20" stroke="#e2e8f0" stroke-width="0.5" />
+                            <line x1="20" y1="50" x2="280" y2="50" stroke="#e2e8f0" stroke-width="0.5" />
+                            <line x1="20" y1="80" x2="280" y2="80" stroke="#e2e8f0" stroke-width="0.5" />
+                            <line x1="20" y1="100" x2="280" y2="100" stroke="#94a3b8" stroke-width="1" />
+                            <line x1="20" y1="20" x2="20" y2="100" stroke="#94a3b8" stroke-width="1" />
+                            
+                            <!-- Run Lines -->
+                            <!-- Pressure (Blue) -->
+                            <path d="M 20 48 Q 50 45 80 50 T 140 48 T 200 52 T 260 47 T 280 49" fill="none" stroke="#0ea5e9" stroke-width="1.5" />
+                            <!-- Temp (Red, drifting up) -->
+                            <path d="M 20 85 Q 50 82 80 78 T 140 68 T 200 58 T 260 45 T 280 35" fill="none" stroke="#ef4444" stroke-width="1.5" />
+                            <!-- Rate (Purple) -->
+                            <path d="M 20 62 Q 50 64 80 60 T 140 65 T 200 58 T 260 62 T 280 60" fill="none" stroke="#a855f7" stroke-width="1.5" />
+                            <!-- Water (Green) -->
+                            <path d="M 20 25 Q 50 24 80 26 T 140 25 T 200 26 T 260 25 T 280 24" fill="none" stroke="#10b981" stroke-width="1.5" />
+                            
+                            <text x="25" y="15" fill="#64748b" font-size="7" font-weight="bold">수집 시간 (1분 주기)</text>
+                            <text x="245" y="112" fill="#64748b" font-size="7" font-weight="bold">60분 경과</text>
+                          </svg>
+                          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-top: 0.3rem; display: block;">[센서별 실시간 다중 런 차트 예시]</span>
+                        </div>
+                      </div>
+
+                      <!-- 2. SPC 통계 관리도 Card -->
+                      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem;">
+                          <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #fee2e2; color: #ef4444; font-weight: 800; font-size: 0.9rem;">2</span>
+                          <h5 style="margin: 0; color: var(--text-primary); font-size: 0.95rem; font-weight: 800;">SPC 통계 관리도 (SPC Control Chart)</h5>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.45; margin-bottom: 1rem;">
+                          정상 가동 이력의 평균값(CL)과 자연 변동 오차 한계선인 ±3σ(UCL/LCL) 라인을 그려 노이즈와 공정 이상 징후를 칼같이 판별합니다.
+                        </p>
+                        
+                        <!-- Inline SVG SPC Chart Mockup -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.6rem 0.5rem; text-align: center;">
+                          <svg viewBox="0 0 300 120" style="width: 100%; height: auto;">
+                            <!-- Axes -->
+                            <line x1="20" y1="15" x2="20" y2="105" stroke="#94a3b8" stroke-width="1" />
+                            <line x1="20" y1="105" x2="280" y2="105" stroke="#94a3b8" stroke-width="1" />
+                            
+                            <!-- UCL (Red dashed) -->
+                            <line x1="20" y1="30" x2="280" y2="30" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3" />
+                            <text x="245" y="26" fill="#ef4444" font-size="7" font-weight="bold">UCL (+3σ)</text>
+                            
+                            <!-- CL (Gray solid) -->
+                            <line x1="20" y1="60" x2="280" y2="60" stroke="#64748b" stroke-width="1" />
+                            <text x="245" y="56" fill="#64748b" font-size="7" font-weight="bold">CL (평균)</text>
+                            
+                            <!-- LCL (Red dashed) -->
+                            <line x1="20" y1="90" x2="280" y2="90" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3" />
+                            <text x="245" y="86" fill="#ef4444" font-size="7" font-weight="bold">LCL (-3σ)</text>
+                            
+                            <!-- Fluctuation path -->
+                            <path d="M 20 62 L 40 58 L 60 65 L 80 50 L 100 70 L 120 55 L 140 62 L 160 40 L 180 75 L 200 48 L 220 32 L 240 25 L 260 22 L 280 18" fill="none" stroke="#a855f7" stroke-width="1.5" />
+                            
+                            <!-- Highlight out of control dots -->
+                            <circle cx="240" cy="25" r="3.5" fill="#ef4444" stroke="#ffffff" stroke-width="0.8" />
+                            <circle cx="260" cy="22" r="3.5" fill="#ef4444" stroke="#ffffff" stroke-width="0.8" />
+                            <circle cx="280" cy="18" r="3.5" fill="#ef4444" stroke="#ffffff" stroke-width="0.8" />
+                            
+                            <!-- Alert tooltip -->
+                            <rect x="200" y="5" width="75" height="12" rx="3" fill="#ef4444" opacity="0.85" />
+                            <text x="204" y="13" fill="#ffffff" font-size="6.5" font-weight="black">이상 검지 (OOC)!</text>
+                          </svg>
+                          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-top: 0.3rem; display: block;">[통계적 관리도(SPC) 및 이상 이탈 검지 예시]</span>
+                        </div>
+                      </div>
+
+                      <!-- 3. 피어슨 상관관계 히트맵 Card -->
+                      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem;">
+                          <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #fdf2f8; color: #db2777; font-weight: 800; font-size: 0.9rem;">3</span>
+                          <h5 style="margin: 0; color: var(--text-primary); font-size: 0.95rem; font-weight: 800;">상관관계 히트맵 (Correlation Heatmap)</h5>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.45; margin-bottom: 1rem;">
+                          센서 간 상관계수(-1 ~ +1)를 연산하여 컬러 맵으로 시각화합니다. "소스 가온 시 QCM 증착 속도가 비례하여 오르는지" 등 다차원 공정 물리 법칙을 입증합니다.
+                        </p>
+                        
+                        <!-- Interactive Grid Table Heatmap Mockup -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.7rem 0.5rem; text-align: center;">
+                          <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; font-size: 0.62rem; font-weight: bold; max-width: 260px; margin: 0 auto;">
+                            <!-- Row header / spacer -->
+                            <div></div>
+                            <div style="color: #64748b;">압력</div>
+                            <div style="color: #64748b;">온도</div>
+                            <div style="color: #64748b;">증착률</div>
+                            <div style="color: #64748b;">유량</div>
+                            
+                            <div style="color: #64748b; text-align: left; align-self: center;">압력</div>
+                            <div style="background: #fee2e2; color: #b91c1c; padding: 3px 0; border-radius: 3px;">1.00</div>
+                            <div style="background: #eff6ff; color: #1d4ed8; padding: 3px 0; border-radius: 3px;">-0.08</div>
+                            <div style="background: #f0fdf4; color: #15803d; padding: 3px 0; border-radius: 3px;">0.05</div>
+                            <div style="background: #eff6ff; color: #1d4ed8; padding: 3px 0; border-radius: 3px;">-0.12</div>
+
+                            <div style="color: #64748b; text-align: left; align-self: center;">온도</div>
+                            <div style="background: #eff6ff; color: #1d4ed8; padding: 3px 0; border-radius: 3px;">-0.08</div>
+                            <div style="background: #fee2e2; color: #b91c1c; padding: 3px 0; border-radius: 3px;">1.00</div>
+                            <div style="background: #fca5a5; color: #991b1b; padding: 3px 0; border-radius: 3px; font-weight: 900; box-shadow: inset 0 0 0 1px #ef4444;">0.84</div>
+                            <div style="background: #f0fdf4; color: #15803d; padding: 3px 0; border-radius: 3px;">0.02</div>
+
+                            <div style="color: #64748b; text-align: left; align-self: center;">증착률</div>
+                            <div style="background: #f0fdf4; color: #15803d; padding: 3px 0; border-radius: 3px;">0.05</div>
+                            <div style="background: #fca5a5; color: #991b1b; padding: 3px 0; border-radius: 3px; font-weight: 900; box-shadow: inset 0 0 0 1px #ef4444;">0.84</div>
+                            <div style="background: #fee2e2; color: #b91c1c; padding: 3px 0; border-radius: 3px;">1.00</div>
+                            <div style="background: #eff6ff; color: #1d4ed8; padding: 3px 0; border-radius: 3px;">-0.04</div>
+
+                            <div style="color: #64748b; text-align: left; align-self: center;">유량</div>
+                            <div style="background: #eff6ff; color: #1d4ed8; padding: 3px 0; border-radius: 3px;">-0.12</div>
+                            <div style="background: #f0fdf4; color: #15803d; padding: 3px 0; border-radius: 3px;">0.02</div>
+                            <div style="background: #eff6ff; color: #1d4ed8; padding: 3px 0; border-radius: 3px;">-0.04</div>
+                            <div style="background: #fee2e2; color: #b91c1c; padding: 3px 0; border-radius: 3px;">1.00</div>
+                          </div>
+                          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-top: 0.35rem; display: block;">[4차원 센서 간 피어슨 상관계수 매트릭스]</span>
+                        </div>
+                      </div>
+                      
+                    </div>
                   </div>
                 </div>
               </div>
