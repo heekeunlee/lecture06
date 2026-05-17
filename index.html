@@ -88,13 +88,19 @@
       }
 
       h1 {
-        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-size: clamp(1.8rem, 3.8vw, 2.8rem);
         font-weight: 900;
         letter-spacing: -0.03em;
         line-height: 1.15;
         margin: 0 auto 1.5rem;
-        max-width: 1050px;
+        max-width: 1200px;
         word-break: keep-all;
+      }
+
+      @media (min-width: 1024px) {
+        h1 {
+          white-space: nowrap;
+        }
       }
 
       .subtitle {
